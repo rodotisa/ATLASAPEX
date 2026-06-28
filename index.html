@@ -1,0 +1,2545 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AtlasApex.guru — IAFLOW · Investigación + Herramienta personalizada</title>
+<meta name="description" content="AtlasApex.guru convierte cualquier tema en un curso que se aprende de verdad, con el método IAFLOW: 3 ramas y 10 mecánicas de aprendizaje.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='116' fill='%234F46E5'/%3E%3Cpath d='M104 256 C 168 168 232 168 256 256 S 344 344 408 256' fill='none' stroke='white' stroke-width='42' stroke-linecap='round'/%3E%3Ccircle cx='408' cy='256' r='31' fill='%23F5A623'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --tinta:#0C2B30;        /* fondo profundo, petróleo */
+    --tinta-2:#10393F;      /* paneles elevados */
+    --tinta-3:#0A2226;      /* más oscuro */
+    --hueso:#F3ECDD;        /* texto/superficie clara */
+    --hueso-2:#E7DCC6;
+    --niebla:#9DB3AE;       /* texto atenuado sobre oscuro */
+    --niebla-2:#6E8C88;
+    --ambar:#E9A23B;        /* acento: iluminación / insight */
+    --ambar-2:#C97E1E;
+    --salvia:#84B69B;       /* positivo / consolidar / aceptar */
+    --salvia-2:#5E967D;
+    --arcilla:#CC6F4B;      /* precaución / fármacos */
+    --arcilla-2:#A8512F;
+    --linea:rgba(243,236,221,.14);
+    --linea-fuerte:rgba(243,236,221,.28);
+    --maxw:1120px;
+    --r:14px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+  body{
+    margin:0;background:var(--tinta);color:var(--hueso);
+    font-family:"IBM Plex Sans",system-ui,sans-serif;
+    font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4{font-family:"Fraunces",Georgia,serif;font-weight:600;line-height:1.12;letter-spacing:-.01em;margin:0}
+  p{margin:0 0 1em}
+  a{color:var(--ambar)}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  .mono{font-family:"IBM Plex Mono",monospace}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--ambar);font-weight:500}
+
+  /* ---------- NAV ---------- */
+  .nav{position:sticky;top:0;z-index:50;background:rgba(10,34,38,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--linea)}
+  .nav__in{max-width:var(--maxw);margin:0 auto;padding:11px 22px;display:flex;align-items:center;gap:18px}
+  .nav__brand{font-family:"Fraunces",serif;font-weight:600;font-size:17px;letter-spacing:-.01em;white-space:nowrap}
+  .nav__brand b{color:var(--ambar)}
+  .nav__links{display:flex;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+  .nav__links::-webkit-scrollbar{display:none}
+  .nav__links a{font-family:"IBM Plex Mono",monospace;font-size:12.5px;letter-spacing:.04em;color:var(--niebla);text-decoration:none;padding:6px 10px;border-radius:8px;white-space:nowrap;transition:.2s}
+  .nav__links a:hover{color:var(--hueso);background:var(--linea)}
+  .nav__links a.active{color:var(--tinta);background:var(--ambar)}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;padding:84px 0 64px;overflow:hidden}
+  .hero__contour{position:absolute;inset:0;width:100%;height:100%;opacity:.5;pointer-events:none}
+  .hero__in{position:relative;max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  .hero h1{font-size:clamp(2.6rem,7vw,5.1rem);font-weight:600;max-width:14ch;margin:.35em 0 .3em}
+  .hero h1 em{font-style:italic;color:var(--ambar)}
+  .hero__lede{font-size:clamp(1.05rem,2.4vw,1.32rem);color:var(--hueso);max-width:60ch;opacity:.92}
+  .altmeter{display:flex;align-items:center;gap:14px;margin-top:30px;flex-wrap:wrap}
+  .altmeter__bar{position:relative;height:8px;flex:1;min-width:200px;border-radius:99px;background:linear-gradient(90deg,var(--salvia),var(--ambar),var(--arcilla))}
+  .altmeter__tag{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.08em;color:var(--niebla);text-transform:uppercase}
+  .hero__meta{margin-top:26px;display:flex;gap:26px;flex-wrap:wrap;font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--niebla)}
+  .hero__meta b{color:var(--hueso);font-weight:500}
+
+  /* ---------- SECTION ---------- */
+  .section{padding:74px 0;border-top:1px solid var(--linea);position:relative}
+  .section--tint{background:var(--tinta-3)}
+  .shead{max-width:var(--maxw);margin:0 auto;padding:0 22px 34px}
+  .shead h2{font-size:clamp(1.9rem,4.4vw,3rem);margin:.3em 0 .35em;max-width:20ch}
+  .shead p{color:var(--niebla);max-width:64ch;font-size:1.05rem}
+
+  /* ---------- FICHA INVESTIGACIÓN ---------- */
+  .ficha{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  .ficha__card{border:1px solid var(--linea-fuerte);border-radius:var(--r);background:linear-gradient(180deg,var(--tinta-2),rgba(16,57,63,.45));overflow:hidden}
+  .ficha__top{padding:20px 24px;border-bottom:1px solid var(--linea);display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+  .ficha__top h3{font-size:1.45rem}
+  .ficha__stamp{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--tinta);background:var(--ambar);padding:5px 10px;border-radius:7px}
+  .ficha__rows{display:grid;grid-template-columns:1fr;gap:0}
+  .frow{display:grid;grid-template-columns:170px 1fr;gap:18px;padding:15px 24px;border-bottom:1px solid var(--linea)}
+  .frow:last-child{border-bottom:0}
+  .frow__k{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ambar);padding-top:2px}
+  .frow__v{color:var(--hueso);font-size:.98rem}
+  .frow__v strong{color:#fff}
+  @media(max-width:620px){.frow{grid-template-columns:1fr;gap:5px}}
+
+  /* ---------- TEORÍAS ---------- */
+  .theories{max-width:var(--maxw);margin:0 auto;padding:0 22px;display:flex;flex-direction:column;gap:18px}
+  .theory{position:relative;border:1px solid var(--linea);border-radius:var(--r);background:var(--tinta-2);padding:26px 26px 22px;transition:transform .25s ease,border-color .25s ease}
+  .theory:hover{transform:translateY(-3px);border-color:var(--linea-fuerte)}
+  .theory__head{display:flex;gap:18px;align-items:baseline;flex-wrap:wrap}
+  .theory__num{font-family:"Fraunces",serif;font-size:2.5rem;font-weight:600;color:var(--ambar);line-height:.9;min-width:1.6em}
+  .theory__titles{flex:1;min-width:240px}
+  .theory__name{font-size:1.45rem;margin-bottom:3px}
+  .theory__author{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--niebla);letter-spacing:.03em}
+  .diff{display:inline-flex;align-items:center;gap:7px;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--niebla)}
+  .diff__dots{display:inline-flex;gap:3px}
+  .diff__dot{width:8px;height:8px;border-radius:99px;background:var(--linea-fuerte)}
+  .diff__dot.on{background:var(--ambar)}
+  .theory__grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+  @media(max-width:680px){.theory__grid{grid-template-columns:1fr}}
+  .tblock__k{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ambar);margin-bottom:5px}
+  .tblock p{font-size:.95rem;margin:0;color:var(--hueso)}
+  .tblock--lang .tblock__k{color:var(--salvia)}
+  .tag-ev{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.06em;padding:3px 8px;border-radius:6px;border:1px solid var(--linea-fuerte);color:var(--niebla);margin-top:2px}
+  .bridge{margin-top:20px;padding:14px 16px;border-left:3px solid var(--ambar);background:rgba(233,162,59,.07);border-radius:0 10px 10px 0}
+  .bridge__k{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ambar);margin-bottom:3px}
+  .bridge p{margin:0;font-size:.93rem;color:var(--hueso)}
+  .hinge{position:absolute;top:-11px;right:20px;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--tinta);background:var(--salvia);padding:4px 9px;border-radius:6px}
+
+  /* ---------- SÍNTESIS ---------- */
+  .pipe{max-width:var(--maxw);margin:0 auto;padding:0 22px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media(max-width:900px){.pipe{grid-template-columns:1fr}}
+  .synth{border:1px solid var(--linea-fuerte);border-radius:var(--r);background:linear-gradient(180deg,var(--tinta-2),var(--tinta-3));padding:24px;position:relative;display:flex;flex-direction:column}
+  .synth__step{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ambar)}
+  .synth__range{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--niebla);margin-top:4px}
+  .synth h3{font-size:1.55rem;margin:12px 0 6px}
+  .synth__sub{font-size:.92rem;color:var(--salvia);font-family:"IBM Plex Mono",monospace;letter-spacing:.02em;margin-bottom:12px}
+  .synth p{font-size:.95rem}
+  .synth__merge{margin-top:auto;padding-top:14px;border-top:1px solid var(--linea);font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--niebla)}
+  .synth__merge b{color:var(--hueso);font-weight:500}
+  .pipe__flow{max-width:var(--maxw);margin:26px auto 0;padding:0 22px;display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap;font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--niebla)}
+  .pipe__flow b{color:var(--ambar)}
+
+  /* ---------- SUPLEMENTOS ---------- */
+  .grid-cards{max-width:var(--maxw);margin:0 auto;padding:0 22px;display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  @media(max-width:760px){.grid-cards{grid-template-columns:1fr}}
+  .card{border:1px solid var(--linea);border-radius:var(--r);background:var(--tinta-2);padding:20px 22px}
+  .card__head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px}
+  .card__head h3{font-size:1.2rem}
+  .card p{font-size:.93rem;margin:.4em 0 0}
+  .card__dose{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--niebla);margin-top:10px;display:block}
+  .badge{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:4px 9px;border-radius:99px;white-space:nowrap;font-weight:500}
+  .badge--alto{background:rgba(132,182,155,.18);color:var(--salvia);border:1px solid var(--salvia-2)}
+  .badge--mod{background:rgba(233,162,59,.16);color:var(--ambar);border:1px solid var(--ambar-2)}
+  .badge--bajo{background:rgba(157,179,174,.12);color:var(--niebla);border:1px solid var(--niebla-2)}
+  .badge--prelim{background:rgba(204,111,75,.14);color:var(--arcilla);border:1px solid var(--arcilla-2)}
+
+  /* ---------- AVISO / FÁRMACOS ---------- */
+  .caution{border:1px solid var(--arcilla-2);background:linear-gradient(180deg,rgba(204,111,75,.1),rgba(204,111,75,.03));border-radius:var(--r);padding:18px 22px;max-width:var(--maxw);margin:0 auto 22px;display:flex;gap:14px;align-items:flex-start}
+  .caution svg{flex:none;margin-top:2px}
+  .caution p{margin:0;font-size:.95rem;color:var(--hueso)}
+  .caution b{color:var(--arcilla)}
+  .farmaco .card{border-color:var(--arcilla-2)}
+  .farmaco .card__head h3{color:var(--hueso)}
+
+  /* ---------- ENTORNO ---------- */
+  .env{max-width:var(--maxw);margin:0 auto;padding:0 22px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media(max-width:860px){.env{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:540px){.env{grid-template-columns:1fr}}
+  .env__item{border:1px solid var(--linea);border-radius:12px;background:var(--tinta-2);padding:18px 18px}
+  .env__icon{color:var(--ambar);margin-bottom:8px;display:block}
+  .env__item h3{font-size:1.08rem;margin-bottom:5px}
+  .env__item p{font-size:.9rem;margin:0;color:var(--hueso)}
+  .env__item .mythbust{display:inline-block;margin-top:8px;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.06em;color:var(--arcilla);border:1px solid var(--arcilla-2);padding:2px 7px;border-radius:6px}
+
+  /* ---------- EDAD / SEXO ---------- */
+  .demo{max-width:var(--maxw);margin:0 auto;padding:0 22px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:760px){.demo{grid-template-columns:1fr}}
+
+  /* ---------- KYC ---------- */
+  .kyc{max-width:820px;margin:0 auto;padding:0 22px}
+  .kyc__card{border:1px solid var(--linea-fuerte);border-radius:var(--r);background:var(--tinta-2);padding:26px}
+  .field{margin-bottom:22px}
+  .field>label{display:block;font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ambar);margin-bottom:9px}
+  .field .hint{font-family:"IBM Plex Sans",sans-serif;text-transform:none;letter-spacing:0;color:var(--niebla);font-size:12px;display:block;margin-top:3px}
+  .opts{display:flex;flex-wrap:wrap;gap:8px}
+  .opt{font-family:"IBM Plex Sans",sans-serif;font-size:.9rem;color:var(--hueso);background:var(--tinta-3);border:1px solid var(--linea-fuerte);border-radius:10px;padding:9px 14px;cursor:pointer;transition:.18s}
+  .opt:hover{border-color:var(--ambar)}
+  .opt[aria-pressed="true"]{background:var(--ambar);color:var(--tinta);border-color:var(--ambar);font-weight:600}
+  .kinput{width:100%;font-family:"IBM Plex Sans",sans-serif;font-size:.95rem;color:var(--hueso);background:var(--tinta-3);border:1px solid var(--linea-fuerte);border-radius:10px;padding:11px 13px}
+  .kinput:focus{outline:2px solid var(--ambar);outline-offset:1px}
+  .krow{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:560px){.krow{grid-template-columns:1fr}}
+  .gen-btn{font-family:"IBM Plex Mono",monospace;font-size:14px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;color:var(--tinta);background:var(--ambar);border:0;border-radius:11px;padding:15px 26px;cursor:pointer;transition:.18s;width:100%}
+  .gen-btn:hover{background:var(--ambar-2)}
+  .gen-btn:focus{outline:2px solid var(--hueso);outline-offset:2px}
+
+  /* ---------- ASISTENTE PASO A PASO (WIZARD) ---------- */
+  .wiz__top{margin-bottom:24px}
+  .wiz__meta{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:10px}
+  .wiz__step{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--niebla)}
+  .wiz__step b{color:var(--ambar)}
+  .wiz__label{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.04em;color:var(--hueso);text-align:right}
+  .wiz__track{height:6px;border-radius:99px;background:var(--tinta-3);overflow:hidden;border:1px solid var(--linea)}
+  .wiz__fill{height:100%;width:0;background:linear-gradient(90deg,var(--ambar-2),var(--ambar));border-radius:99px;transition:width .35s ease}
+  .wiz__stage{min-height:158px}
+  .step{display:none}
+  .step.is-active{display:block}
+  .step .field:last-child{margin-bottom:0}
+  .wiz__nav{display:flex;gap:12px;align-items:center;margin-top:26px;padding-top:20px;border-top:1px solid var(--linea)}
+  .wiz__back{font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:.04em;color:var(--niebla);background:transparent;border:1px solid var(--linea-fuerte);border-radius:11px;padding:13px 20px;cursor:pointer;transition:.18s}
+  .wiz__back:hover:not(:disabled){border-color:var(--hueso);color:var(--hueso)}
+  .wiz__back:disabled{opacity:.35;cursor:not-allowed}
+  .wiz__hintline{flex:1;text-align:center;font-family:"IBM Plex Sans",sans-serif;font-size:12px;color:var(--niebla-2)}
+  .wiz__next{font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;color:var(--tinta);background:var(--ambar);border:0;border-radius:11px;padding:14px 24px;cursor:pointer;transition:.18s}
+  .wiz__next:hover:not(:disabled){background:var(--ambar-2)}
+  .wiz__next:focus{outline:2px solid var(--hueso);outline-offset:2px}
+  .wiz__next:disabled{opacity:.45;cursor:not-allowed;background:var(--niebla-2)}
+  .wiz__next--final{background:var(--salvia);color:var(--tinta)}
+  .wiz__next--final:hover:not(:disabled){background:var(--salvia-2)}
+  @media (prefers-reduced-motion: reduce){.wiz__fill{transition:none}}
+  @media(max-width:480px){
+    .wiz__hintline{display:none}
+    .wiz__nav{gap:10px}
+    .wiz__back,.wiz__next{padding:13px 16px}
+  }
+
+  /* ---------- HERO CTA ---------- */
+  .hero__cta{margin-top:24px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .cta-primary{font-family:"IBM Plex Mono",monospace;font-size:13.5px;letter-spacing:.05em;text-transform:uppercase;font-weight:600;color:var(--tinta);background:var(--ambar);border-radius:11px;padding:14px 22px;text-decoration:none;transition:.18s}
+  .cta-primary:hover{background:var(--ambar-2)}
+  .cta-primary:focus{outline:2px solid var(--hueso);outline-offset:2px}
+  .cta-ghost{font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:.04em;color:var(--hueso);text-decoration:none;border-bottom:1px solid var(--linea-fuerte);padding-bottom:2px;transition:.18s}
+  .cta-ghost:hover{color:var(--ambar);border-color:var(--ambar)}
+
+  /* ---------- CURSO / APRENDIZAJE ---------- */
+  .course{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  .course__head{margin-bottom:6px}
+  .course__lede{color:var(--niebla);max-width:66ch;font-size:1.03rem;margin-top:8px}
+  .dash{display:grid;grid-template-columns:repeat(3,1fr) 1.5fr;gap:14px;margin:26px 0 6px;align-items:stretch}
+  @media(max-width:860px){.dash{grid-template-columns:1fr 1fr}}
+  .stat{border:1px solid var(--linea-fuerte);border-radius:var(--r);background:var(--tinta-2);padding:15px 18px;display:flex;flex-direction:column;gap:3px;justify-content:center}
+  .stat__k{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--niebla)}
+  .stat__v{font-family:"Fraunces",serif;font-size:1.85rem;line-height:1;color:var(--hueso);display:flex;align-items:baseline;gap:7px}
+  .stat__v small{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--niebla);font-weight:400}
+  .stat--streak .stat__v{color:var(--ambar);align-items:center}
+  .stat--streak svg{width:21px;height:21px}
+  .stat__cta{border:1px solid var(--ambar-2);border-radius:var(--r);background:linear-gradient(180deg,rgba(233,162,59,.14),var(--tinta-2));padding:15px 18px;display:flex;flex-direction:column;gap:10px;justify-content:center}
+  .stat__cta .stat__k{color:var(--ambar)}
+  .stat__cta b{font-family:"Fraunces",serif;font-size:1.08rem;color:var(--hueso);font-weight:600;line-height:1.2}
+  .go-btn{font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:.05em;text-transform:uppercase;font-weight:600;color:var(--tinta);background:var(--ambar);border:0;border-radius:10px;padding:11px 16px;cursor:pointer;transition:.18s}
+  .go-btn:hover{background:var(--ambar-2)}
+  .go-btn:focus{outline:2px solid var(--hueso);outline-offset:2px}
+  .cbanner{border:1px solid var(--salvia-2);border-radius:var(--r);background:linear-gradient(180deg,rgba(132,182,155,.10),transparent);padding:13px 16px;margin:14px 0 0;font-size:.92rem;color:var(--hueso);display:none;align-items:center;gap:9px}
+  .cbanner.show{display:flex}
+  .cbanner svg{width:18px;height:18px;color:var(--salvia);flex:none}
+
+  .cprog{margin:14px 0 24px}
+  .cprog__track{height:10px;border-radius:99px;background:var(--tinta-3);border:1px solid var(--linea);overflow:hidden}
+  .cprog__fill{height:100%;width:0;background:linear-gradient(90deg,var(--ambar-2),var(--ambar) 65%,var(--salvia));border-radius:99px;transition:width .55s ease}
+  .cprog__cap{display:flex;justify-content:space-between;margin-top:7px;font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--niebla)}
+
+  .lessons{display:grid;gap:12px}
+  .lesson{display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;border:1px solid var(--linea);border-radius:var(--r);background:var(--tinta-2);padding:15px 18px;cursor:pointer;transition:.18s;text-align:left;width:100%;font-family:inherit;color:inherit}
+  .lesson:hover{border-color:var(--ambar);transform:translateY(-1px)}
+  .lesson:focus-visible{outline:2px solid var(--ambar);outline-offset:2px}
+  .lesson__num{width:46px;height:46px;flex:none;border-radius:11px;background:var(--tinta-3);border:1px solid var(--linea-fuerte);display:flex;align-items:center;justify-content:center;font-family:"IBM Plex Mono",monospace;font-size:15px;color:var(--ambar);font-weight:600}
+  .lesson__main{min-width:0}
+  .lesson__t{font-family:"Fraunces",serif;font-size:1.1rem;color:var(--hueso);margin-bottom:2px}
+  .lesson__o{font-size:.88rem;color:var(--niebla);overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;line-clamp:1}
+  .lesson__st{flex:none;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.04em;color:var(--niebla);display:flex;align-items:center;gap:7px;white-space:nowrap}
+  .lesson__dot{width:10px;height:10px;border-radius:50%;border:1.5px solid var(--niebla-2)}
+  .lesson[data-done="1"]{border-color:var(--salvia-2);background:linear-gradient(180deg,rgba(132,182,155,.07),var(--tinta-2))}
+  .lesson[data-done="1"] .lesson__num{background:var(--salvia);color:var(--tinta);border-color:var(--salvia)}
+  .lesson[data-done="1"] .lesson__dot{background:var(--salvia);border-color:var(--salvia)}
+  .lesson[data-done="1"] .lesson__st{color:var(--salvia)}
+  .lesson[data-next="1"]{border-color:var(--ambar);box-shadow:0 0 0 1px var(--ambar) inset}
+  .lesson__badge{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:var(--tinta);background:var(--ambar);border-radius:6px;padding:3px 7px;margin-left:9px}
+  @media(max-width:520px){.lesson{grid-template-columns:auto 1fr}.lesson__st{grid-column:1 / -1;justify-content:flex-start;margin-top:2px}}
+
+  .lpanel{display:none;border:1px solid var(--linea-fuerte);border-radius:16px;background:var(--tinta-2);margin-top:18px;overflow:hidden}
+  .lpanel.show{display:block;animation:fade .4s ease}
+  .lpanel__bar{display:flex;align-items:center;gap:12px;justify-content:space-between;padding:14px 20px;border-bottom:1px solid var(--linea);background:var(--tinta-3)}
+  .lpanel__back{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--niebla);background:transparent;border:1px solid var(--linea-fuerte);border-radius:9px;padding:8px 13px;cursor:pointer;transition:.18s}
+  .lpanel__back:hover{border-color:var(--ambar);color:var(--ambar)}
+  .lpanel__day{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ambar)}
+  .lpanel__body{padding:24px 26px}
+  @media(max-width:560px){.lpanel__body{padding:20px 18px}}
+  .lpanel__t{font-size:clamp(1.4rem,3.4vw,1.95rem);margin-bottom:4px}
+  .lpanel__dur{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--niebla);margin-bottom:6px}
+  .lblock{margin:20px 0}
+  .lblock__k{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ambar);margin-bottom:9px;display:flex;align-items:center;gap:8px}
+  .lblock__k::before{content:"";width:14px;height:1px;background:var(--ambar);display:inline-block}
+  .lblock p{color:var(--hueso);opacity:.92;margin:0 0 9px;line-height:1.62}
+  .lblock li{color:var(--hueso);opacity:.92;margin:0 0 6px;line-height:1.55}
+  .lblock ul,.lblock ol{margin:0;padding-left:20px}
+  .lblock b{color:var(--hueso)}
+  .lresources{display:grid;gap:8px}
+  .lres{display:flex;gap:10px;align-items:center;border:1px solid var(--linea);border-radius:10px;padding:10px 13px;background:var(--tinta-3);color:var(--hueso);text-decoration:none;font-size:.92rem;transition:.18s}
+  .lres:hover{border-color:var(--ambar)}
+  .lres svg{width:16px;height:16px;flex:none;color:var(--ambar)}
+  .lres em{font-style:normal;color:var(--niebla);font-size:.82rem;font-family:"IBM Plex Mono",monospace;margin-left:auto;white-space:nowrap}
+  .glossary{display:grid;gap:9px;margin-top:4px}
+  .gterm{border-left:2px solid var(--ambar-2);padding:1px 0 1px 13px;font-size:.92rem;line-height:1.5}
+  .gterm b{color:var(--hueso)}
+  .gterm span{color:var(--niebla);opacity:.95}
+  .logro{border:1px solid var(--salvia-2);border-radius:12px;background:linear-gradient(180deg,rgba(132,182,155,.08),transparent);padding:14px 16px;margin:20px 0}
+  .logro .lblock__k{color:var(--salvia);margin-bottom:6px}
+  .logro .lblock__k::before{background:var(--salvia)}
+  .logro p{margin:0}
+  .lpanel__foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;margin-top:22px;padding-top:18px;border-top:1px solid var(--linea)}
+  .done-btn{font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:.05em;text-transform:uppercase;font-weight:600;color:var(--tinta);background:var(--salvia);border:0;border-radius:11px;padding:14px 22px;cursor:pointer;transition:.18s}
+  .done-btn:hover{background:var(--salvia-2)}
+  .done-btn:focus{outline:2px solid var(--hueso);outline-offset:2px}
+  .done-btn.is-done{background:var(--tinta-3);color:var(--salvia);border:1px solid var(--salvia-2)}
+  .done-btn.flash{animation:pop .5s ease}
+  .foot-msg{font-size:.9rem;color:var(--niebla);max-width:42ch}
+  .foot-msg b{color:var(--salvia)}
+
+  /* TEMPORIZADOR VISUAL "UPLOADING TO BRAIN" (sin números) */
+  .uplink{border:1px solid var(--linea-fuerte);border-radius:14px;background:radial-gradient(130% 130% at 50% 0%,rgba(233,162,59,.07),var(--tinta-3));padding:22px;margin:22px 0;text-align:center}
+  .uplink__title{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ambar)}
+  .uplink__sub{font-size:.85rem;color:var(--niebla);margin-top:5px;max-width:46ch;margin-left:auto;margin-right:auto}
+  .uplink__viz{width:184px;height:184px;margin:18px auto 8px;position:relative}
+  .uplink__viz svg{width:100%;height:100%;display:block}
+  .uplink__status{font-family:"IBM Plex Mono",monospace;font-size:12.5px;letter-spacing:.05em;color:var(--hueso);min-height:18px;transition:opacity .25s}
+  .uplink__hint{font-size:.78rem;color:var(--niebla-2);margin-top:4px}
+  .uplink__opts{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+  .uchip{font-family:"IBM Plex Sans",sans-serif;font-size:.86rem;color:var(--hueso);background:var(--tinta-2);border:1px solid var(--linea-fuerte);border-radius:10px;padding:9px 15px;cursor:pointer;transition:.18s;display:flex;flex-direction:column;align-items:center;line-height:1.15;min-width:92px}
+  .uchip small{font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--niebla);margin-top:3px;letter-spacing:.03em}
+  .uchip:hover{border-color:var(--ambar)}
+  .uchip[aria-pressed="true"]{background:var(--ambar);color:var(--tinta);border-color:var(--ambar)}
+  .uchip[aria-pressed="true"] small{color:rgba(12,43,48,.72)}
+  .uplink__ctrls{display:flex;gap:10px;justify-content:center;margin-top:16px}
+  .uctl{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.04em;color:var(--hueso);background:transparent;border:1px solid var(--linea-fuerte);border-radius:10px;padding:11px 20px;cursor:pointer;transition:.18s}
+  .uctl:hover{border-color:var(--ambar);color:var(--ambar)}
+  .uctl--go{background:var(--ambar);color:var(--tinta);border-color:var(--ambar);font-weight:600}
+  .uctl--go:hover{background:var(--ambar-2);color:var(--tinta)}
+  .upl-particle{opacity:0}
+  .uplink.run .upl-particle{animation:rise 2.6s linear infinite}
+  .uplink.run .upl-particle:nth-of-type(2){animation-delay:.9s}
+  .uplink.run .upl-particle:nth-of-type(3){animation-delay:1.7s}
+  @keyframes rise{0%{opacity:0;transform:translateY(30px)}25%{opacity:.9}100%{opacity:0;transform:translateY(-26px)}}
+  .uplink.done .uplink__viz{animation:pop .55s ease}
+  @keyframes pop{0%{transform:scale(1)}45%{transform:scale(1.05)}100%{transform:scale(1)}}
+  @media (prefers-reduced-motion: reduce){.uplink.run .upl-particle{animation:none;opacity:0}.uplink.done .uplink__viz{animation:none}}
+
+  .savenote{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--niebla-2);margin-top:20px;display:flex;align-items:center;gap:7px;justify-content:center}
+  .savenote svg{width:13px;height:13px;color:var(--salvia);flex:none}
+
+  /* ---------- GLOSARIO ---------- */
+  .gloss-search{max-width:var(--maxw);margin:0 auto 18px;padding:0 22px}
+  .gloss-search input{width:100%;max-width:440px;background:var(--tinta-2);border:1px solid var(--linea-fuerte);border-radius:11px;color:var(--hueso);font-family:"IBM Plex Sans",sans-serif;font-size:.96rem;padding:12px 15px;outline:none;transition:.18s}
+  .gloss-search input:focus{border-color:var(--ambar)}
+  .gloss-search input::placeholder{color:var(--niebla-2)}
+  .gloss-grid{max-width:var(--maxw);margin:0 auto;padding:0 22px;display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:12px}
+  .gcard{border:1px solid var(--linea);border-radius:var(--r);background:var(--tinta-2);padding:14px 16px;transition:.18s}
+  .gcard:hover{border-color:var(--ambar)}
+  .gcard h4{font-family:"Fraunces",serif;font-size:1.05rem;color:var(--ambar);margin:0 0 5px;font-weight:600}
+  .gcard p{margin:0;font-size:.9rem;color:var(--hueso);opacity:.9;line-height:1.5}
+  .gcard--empty{grid-column:1/-1;border-style:dashed;color:var(--niebla);text-align:center;padding:22px}
+
+  /* término con definición al pasar el cursor / tocar */
+  .gloss-term{border-bottom:1px dotted var(--ambar);cursor:help;color:inherit;transition:background .15s;border-radius:3px;padding:0 1px}
+  .gloss-term:hover,.gloss-term:focus{background:rgba(233,162,59,.16);outline:none}
+  .gloss-tip{position:fixed;z-index:200;max-width:282px;background:var(--tinta-3);border:1px solid var(--ambar-2);border-radius:10px;padding:11px 13px;box-shadow:0 12px 34px rgba(0,0,0,.42);opacity:0;transform:translateY(4px);pointer-events:none;transition:opacity .15s,transform .15s}
+  .gloss-tip.show{opacity:1;transform:translateY(0)}
+  .gloss-tip b{display:block;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--ambar);margin-bottom:4px}
+  .gloss-tip span{font-size:.88rem;color:var(--hueso);line-height:1.5;display:block}
+
+  /* ---------- PEDAGOGÍA EN CADA CAPÍTULO ---------- */
+  .ltags{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin:16px 0 2px}
+  .ltags__k{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--niebla);margin-right:2px}
+  .ltag{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--salvia);background:rgba(132,182,155,.12);border:1px solid var(--salvia-2);border-radius:99px;padding:4px 10px}
+
+  .lvideo{position:relative;width:100%;aspect-ratio:16/9;margin:16px 0;border-radius:12px;overflow:hidden;border:1px solid var(--linea-fuerte);background:var(--tinta-3)}
+  .lvideo iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+  .diagram{margin:16px 0;border:1px solid var(--linea);border-radius:12px;background:var(--tinta-3);padding:16px 16px 10px}
+  .diagram svg{display:block;width:100%;height:auto}
+  .diagram figcaption{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--niebla);margin-top:8px;text-align:center;line-height:1.5}
+
+  .check{border:1px solid var(--ambar-2);border-radius:12px;background:linear-gradient(180deg,rgba(233,162,59,.06),transparent);padding:14px 16px;margin:20px 0}
+  .check .lblock__k{color:var(--ambar);margin-bottom:8px}
+  .check__q{color:var(--hueso);font-weight:500;margin:0 0 10px;line-height:1.5}
+  .check__btn{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.03em;color:var(--ambar);background:transparent;border:1px solid var(--ambar-2);border-radius:9px;padding:9px 15px;cursor:pointer;transition:.18s}
+  .check__btn:hover{background:var(--ambar);color:var(--tinta)}
+  .check__a{max-height:0;overflow:hidden;opacity:0;transition:max-height .32s ease,opacity .32s ease,margin .32s ease;margin-top:0}
+  .check__a.show{max-height:460px;opacity:1;margin-top:12px}
+  .check__a p{margin:0;color:var(--hueso);opacity:.92;line-height:1.6;border-left:2px solid var(--salvia);padding-left:12px}
+
+  .repaso{font-size:.9rem;color:var(--niebla);border-top:1px dashed var(--linea-fuerte);padding-top:14px;margin-top:8px;line-height:1.55}
+  .repaso b{color:var(--salvia)}
+
+  /* ---------- CÓMO FUNCIONA ---------- */
+  .howto{max-width:var(--maxw);margin:0 auto 8px;padding:0 22px}
+  .howto__in{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:10px;align-items:stretch;border:1px solid var(--linea-fuerte);border-radius:14px;background:linear-gradient(180deg,rgba(233,162,59,.05),var(--tinta-2));padding:16px}
+  .howto__step{display:flex;gap:11px;align-items:flex-start}
+  .howto__n{flex:none;width:28px;height:28px;border-radius:8px;background:var(--ambar);color:var(--tinta);font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:14px;display:flex;align-items:center;justify-content:center}
+  .howto__step b{font-family:"Fraunces",serif;font-size:1.02rem;color:var(--hueso)}
+  .howto__step p{margin:3px 0 0;font-size:.86rem;color:var(--niebla);line-height:1.45}
+  .howto__arrow{align-self:center;color:var(--ambar);font-size:1.3rem;font-family:"IBM Plex Mono",monospace}
+  @media(max-width:760px){.howto__in{grid-template-columns:1fr}.howto__arrow{transform:rotate(90deg);justify-self:center}}
+
+  /* ---------- RESULTADOS / RECOMENDACIONES ---------- */
+  .plan{max-width:880px;margin:34px auto 0;padding:0 22px;display:none}
+  .plan.show{display:block;animation:fade .4s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .plan__head{text-align:center;margin-bottom:8px}
+  .plan__head h3{font-size:1.7rem}
+  .plan__head p{color:var(--niebla);font-size:.95rem}
+  .plan__bar{position:sticky;top:54px;z-index:20;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:rgba(10,34,38,.9);backdrop-filter:blur(8px);border:1px solid var(--linea);border-radius:12px;padding:12px 16px;margin:18px 0}
+  .plan__count{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--hueso)}
+  .plan__count b{color:var(--salvia)}
+  .mini-btn{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.04em;color:var(--hueso);background:transparent;border:1px solid var(--linea-fuerte);border-radius:9px;padding:8px 14px;cursor:pointer;transition:.18s}
+  .mini-btn:hover{border-color:var(--ambar);color:var(--ambar)}
+  .rec{border:1px solid var(--linea);border-radius:var(--r);background:var(--tinta-2);padding:20px 22px;margin-bottom:14px;display:flex;gap:16px;transition:.2s}
+  .rec[data-state="in"]{border-color:var(--salvia-2);background:linear-gradient(180deg,rgba(132,182,155,.08),var(--tinta-2))}
+  .rec[data-state="out"]{opacity:.5}
+  .rec__icon{flex:none;width:46px;height:46px;border-radius:11px;background:var(--tinta-3);display:flex;align-items:center;justify-content:center;color:var(--ambar)}
+  .rec[data-state="in"] .rec__icon{color:var(--salvia)}
+  .rec__body{flex:1;min-width:0}
+  .rec__phase{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--niebla)}
+  .rec__title{font-family:"Fraunces",serif;font-size:1.2rem;font-weight:600;margin:3px 0 6px}
+  .rec__body p{font-size:.93rem;margin:0 0 10px}
+  .rec__why{border-left:3px solid var(--ambar);background:rgba(233,162,59,.07);padding:9px 12px;border-radius:0 9px 9px 0;font-size:.88rem}
+  .rec__why b{color:var(--ambar);font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:2px;font-weight:500}
+  .rec__acts{display:flex;gap:8px;margin-top:12px}
+  .rec__btn{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.04em;border-radius:9px;padding:7px 13px;cursor:pointer;border:1px solid var(--linea-fuerte);background:transparent;color:var(--hueso);transition:.16s;display:inline-flex;align-items:center;gap:6px}
+  .rec__btn--in[aria-pressed="true"]{background:var(--salvia);color:var(--tinta);border-color:var(--salvia)}
+  .rec__btn--out[aria-pressed="true"]{background:var(--arcilla);color:var(--tinta);border-color:var(--arcilla)}
+  .rec__btn:hover{border-color:var(--hueso)}
+
+  /* ---------- FOOTER ---------- */
+  .foot{border-top:1px solid var(--linea);padding:50px 0 60px;background:var(--tinta-3)}
+  .foot__in{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  .foot h3{font-size:1.2rem;margin-bottom:10px}
+  .foot p{font-size:.86rem;color:var(--niebla);max-width:72ch}
+  .foot__sources{margin-top:18px;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--niebla-2);line-height:1.9}
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion: reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+  @media print{
+    .nav,.hero__contour,.plan__bar,.rec__acts,.gen-btn,.kyc__card{display:none!important}
+    body{background:#fff;color:#111}
+    .rec,.card,.synth{break-inside:avoid}
+  }
+  /* ---------- GENERADOR DE VIDEO (IAFLOW) ---------- */
+  #generador .gp-lede{color:var(--niebla);max-width:64ch}
+  .gp-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:26px}
+  @media (max-width:880px){.gp-grid{grid-template-columns:1fr}}
+  .gp-panel{background:var(--tinta-2);border:1px solid var(--linea);border-radius:var(--r);padding:20px}
+  .gp-panel > .eyebrow{display:block;margin-bottom:16px}
+  .gp-field{display:block;font-family:"IBM Plex Sans",sans-serif;font-size:13.5px;font-weight:600;color:var(--hueso);margin:0 0 5px}
+  .gp-hint{font-weight:400;color:var(--niebla-2)}
+  .gp-panel input[type=text], .gp-panel textarea, .gp-panel select{
+    width:100%;font-family:"IBM Plex Sans",sans-serif;font-size:15px;color:var(--hueso);
+    background:var(--tinta-3);border:1px solid var(--linea);border-radius:10px;padding:10px 12px;margin-bottom:14px;transition:border-color .15s,box-shadow .15s}
+  .gp-panel textarea{resize:vertical;min-height:60px;line-height:1.5}
+  .gp-panel input:focus, .gp-panel textarea:focus, .gp-panel select:focus{outline:none;border-color:var(--ambar);box-shadow:0 0 0 3px rgba(233,162,59,.18)}
+  .gp-row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .gp-idea{border:1px solid var(--linea);border-radius:12px;padding:12px;margin-bottom:12px;background:var(--tinta-3)}
+  .gp-idea-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+  .gp-num{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;color:var(--ambar);font-weight:600}
+  .gp-x{border:none;background:none;color:var(--niebla-2);cursor:pointer;font-size:18px;line-height:1;padding:2px 7px;border-radius:6px}
+  .gp-x:hover{background:var(--linea);color:var(--hueso)}
+  .gp-btn{font-family:"IBM Plex Sans",sans-serif;font-size:14px;font-weight:600;cursor:pointer;border-radius:10px;padding:10px 16px;border:1px solid var(--linea-fuerte);background:transparent;color:var(--hueso);transition:.15s}
+  .gp-btn:hover{background:var(--linea)}
+  .gp-btn--add{width:100%;border-style:dashed;color:var(--ambar)}
+  .gp-btn--primary{background:var(--ambar);color:var(--tinta);border:none;font-size:15px;padding:12px 20px}
+  .gp-btn--primary:hover{background:var(--ambar-2);color:var(--hueso)}
+  .gp-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
+  .gp-empty{color:var(--niebla-2);font-size:14px;text-align:center;padding:34px 12px;border:1px dashed var(--linea-fuerte);border-radius:12px}
+  .gp-meta{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+  .gp-chip{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.04em;background:var(--linea);color:var(--hueso);border-radius:999px;padding:4px 11px}
+  .gp-chip--amber{background:rgba(233,162,59,.16);color:var(--ambar)}
+  .gp-block{margin-bottom:20px}
+  .gp-block-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;gap:10px}
+  .gp-block-top h3{font-family:"Fraunces",serif;font-size:16px;color:var(--hueso)}
+  .gp-mini{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;border:1px solid var(--linea-fuerte);background:transparent;color:var(--hueso);border-radius:8px;padding:5px 10px;cursor:pointer}
+  .gp-mini:hover{background:var(--linea)}
+  .gp-ta{width:100%;min-height:200px;font-family:"IBM Plex Mono",monospace;font-size:12.5px;line-height:1.6;color:var(--hueso);background:var(--tinta-3);border:1px solid var(--linea);border-radius:10px;padding:12px;resize:vertical}
+  .gp-ta:focus{outline:none;border-color:var(--ambar)}
+  .gp-tablewrap{overflow-x:auto}
+  .gp-table{width:100%;border-collapse:collapse;font-size:12.5px}
+  .gp-table th,.gp-table td{border:1px solid var(--linea);padding:7px 9px;text-align:left;vertical-align:top;color:var(--hueso)}
+  .gp-table th{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--niebla);background:var(--tinta-3)}
+  .gp-table td[contenteditable]:focus{outline:2px solid rgba(233,162,59,.4);outline-offset:-2px}
+  .gp-dur{white-space:nowrap;color:var(--niebla);font-family:"IBM Plex Mono",monospace}
+  .gp-err{color:var(--arcilla);font-size:13px;margin-top:6px}
+  .gp-toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);background:var(--hueso);color:var(--tinta);font-size:13px;font-weight:600;padding:10px 16px;border-radius:10px;opacity:0;pointer-events:none;transition:.2s;z-index:200;font-family:"IBM Plex Sans",sans-serif}
+  .gp-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  /* ---------- NAV DROPDOWN ---------- */
+  .nav__drop{position:relative;display:inline-flex;align-items:center}
+  .nav__dropbtn{font-family:"IBM Plex Mono",monospace;font-size:12.5px;letter-spacing:.04em;color:var(--niebla);background:transparent;border:0;cursor:pointer;padding:6px 10px;border-radius:8px;white-space:nowrap;transition:.2s}
+  .nav__dropbtn:hover{color:var(--hueso);background:var(--linea)}
+  .nav__drop.open .nav__dropbtn{color:var(--tinta);background:var(--ambar)}
+  .nav__menu{position:fixed;display:none;flex-direction:column;min-width:200px;background:var(--tinta-2);border:1px solid var(--linea-fuerte);border-radius:12px;padding:6px;z-index:120;box-shadow:0 16px 44px rgba(0,0,0,.5)}
+  .nav__menu a{font-family:"IBM Plex Sans",sans-serif;font-size:14px;letter-spacing:0;color:var(--niebla);text-decoration:none;padding:8px 11px;border-radius:8px;white-space:nowrap}
+  .nav__menu a:hover{color:var(--hueso);background:var(--linea)}
+
+  /* ---------- PERFIL: TARJETA DE USUARIO ---------- */
+  .profcard{display:flex;gap:16px;align-items:flex-start;background:var(--tinta-2);border:1px solid var(--linea);border-radius:var(--r);padding:18px 20px;margin-bottom:24px}
+  .profcard__av{flex:none;width:52px;height:52px;border-radius:50%;background:var(--ambar);color:var(--tinta);font-family:"Fraunces",serif;font-weight:600;font-size:24px;display:flex;align-items:center;justify-content:center;text-transform:uppercase}
+  .profcard__body{flex:1;min-width:0}
+  .profcard__hi{font-family:"Fraunces",serif;font-size:19px;color:var(--hueso);margin:0 0 2px}
+  .profcard__sub{font-size:13.5px;color:var(--niebla);margin:0 0 12px}
+  .profcard__row{display:flex;gap:8px;flex-wrap:wrap}
+  .profcard__row input{flex:1;min-width:150px;font-family:"IBM Plex Sans",sans-serif;font-size:15px;color:var(--hueso);background:var(--tinta-3);border:1px solid var(--linea);border-radius:10px;padding:9px 12px}
+  .profcard__row input:focus{outline:none;border-color:var(--ambar)}
+  .profcard__btn{font-family:"IBM Plex Sans",sans-serif;font-size:14px;font-weight:600;background:var(--ambar);color:var(--tinta);border:0;border-radius:10px;padding:9px 18px;cursor:pointer}
+  .profcard__btn:hover{background:var(--ambar-2);color:var(--hueso)}
+  .profcard__cta{display:inline-block;margin-top:12px;font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--ambar);text-decoration:none}
+  .profcard__cta:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav__in">
+    <span class="nav__brand" style="display:inline-flex;align-items:center;gap:9px"><svg width="26" height="26" viewBox="0 0 512 512" aria-hidden="true" style="flex:none;border-radius:7px"><defs><linearGradient id="navg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#16BFA6"/><stop offset=".55" stop-color="#4F46E5"/><stop offset="1" stop-color="#7C3AED"/></linearGradient></defs><rect width="512" height="512" rx="116" fill="url(#navg)"/><path d="M104 256 C 168 168 232 168 256 256 S 344 344 408 256" fill="none" stroke="#fff" stroke-width="42" stroke-linecap="round"/><circle cx="408" cy="256" r="31" fill="#F5A623"/></svg>AtlasApex<b>.guru</b></span>
+    <div class="nav__links">
+      <a href="#curso">Cursos</a>
+      <div class="nav__drop" id="navDrop">
+        <button class="nav__dropbtn" type="button" id="navDropBtn" aria-expanded="false" aria-haspopup="true">Qué es AtlasApex <span aria-hidden="true">&#9662;</span></button>
+        <div class="nav__menu" id="navDropMenu">
+          <a href="#ficha">Ficha de la investigación</a>
+          <a href="#teorias">10 teorías</a>
+          <a href="#sintesis">3 síntesis</a>
+          <a href="#suplementos">Suplementos</a>
+          <a href="#farmacos">Fármacos</a>
+          <a href="#entorno">Entorno</a>
+          <a href="#demografia">Edad y sexo</a>
+          <a href="#glosario">Glosario</a>
+        </div>
+      </div>
+      <a href="#generador">Generador de video</a>
+      <a href="#perfil">Tu perfil</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <svg class="hero__contour" viewBox="0 0 1200 520" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g fill="none" stroke="#E9A23B" stroke-width="1">
+      <path d="M-40,440 C200,400 360,470 560,420 C760,370 900,440 1240,390" opacity=".22"/>
+      <path d="M-40,400 C220,350 380,430 580,375 C780,320 920,400 1240,345" opacity=".18"/>
+      <path d="M-40,360 C240,300 400,390 600,330 C800,270 940,360 1240,300" opacity=".15"/>
+      <path d="M-40,320 C260,255 420,350 620,285 C820,225 960,320 1240,255" opacity=".12"/>
+      <path d="M-40,280 C280,210 440,310 640,240 C840,180 980,280 1240,210" opacity=".10"/>
+      <path d="M-40,240 C300,165 460,270 660,195 C860,135 1000,240 1240,165" opacity=".08"/>
+      <path d="M-40,200 C320,120 480,230 680,150 C880,90 1020,200 1240,120" opacity=".06"/>
+    </g>
+  </svg>
+  <div class="hero__in">
+    <span class="eyebrow">Un método para aprender · convierte cualquier tema en un curso</span>
+    <h1>Convierte cualquier tema en un curso que <em>se aprende de verdad</em>.</h1>
+    <p class="hero__lede">Esta aplicación toma conocimiento en bruto y lo estructura con un método de base científica: <strong>3 ramas y 10 mecánicas</strong> —doble codificación, práctica de recuperación, repetición espaciada y más—. Empieza con el <strong>Curso 01: Entender la IA con Claude</strong>; los próximos temas se sumarán con la misma estructura.</p>
+    <div class="hero__cta">
+      <a class="cta-primary" href="#curso">Empezar el curso →</a>
+      <a class="cta-ghost" href="#teorias">Ver el método científico</a>
+    </div>
+    <div class="altmeter">
+      <span class="altmeter__tag">Base · cualquiera entra</span>
+      <span class="altmeter__bar" aria-hidden="true"></span>
+      <span class="altmeter__tag">Cumbre · maestría</span>
+    </div>
+    <div class="hero__meta">
+      <span><b>Entra:</b> cualquier investigación</span>
+      <span><b>Estructura:</b> 3 ramas · 10 mecánicas</span>
+      <span><b>Sale:</b> un curso que se aprende</span>
+    </div>
+  </div>
+</header>
+
+<!-- CÓMO FUNCIONA -->
+<section class="howto" aria-label="Cómo funciona">
+  <div class="howto__in">
+    <div class="howto__step"><span class="howto__n">1</span><div><b>Entra</b><p>Cualquier investigación o tema de estudio.</p></div></div>
+    <div class="howto__arrow">&rarr;</div>
+    <div class="howto__step"><span class="howto__n">2</span><div><b>El método lo estructura</b><p>3 ramas y 10 mecánicas: recuperación, repaso, doble codificación…</p></div></div>
+    <div class="howto__arrow">&rarr;</div>
+    <div class="howto__step"><span class="howto__n">3</span><div><b>Sale un curso</b><p>Con diagrama, comprobación, repaso espaciado y señal de logro.</p></div></div>
+  </div>
+</section>
+
+<!-- CURSO 01 -->
+<section class="section" id="curso">
+  <div class="course">
+    <div class="shead reveal" style="padding-left:0;padding-right:0;max-width:none">
+      <span class="eyebrow">Curso 01 · Incluido</span>
+      <h2 class="course__title">Entender la IA con Claude — en 10 sesiones</h2>
+      <p class="course__lede">Un plan real y verificable para entender qué es la inteligencia artificial, cómo genera, qué hace "detrás de pantalla", cómo se conecta con herramientas y otras IAs, y cómo usar Claude como experto. No se aprende todo el campo en 10 días, pero sí una base sólida y durable. Tu avance y tu racha se guardan en este dispositivo.</p>
+    </div>
+
+    <!-- Tablero de rutina -->
+    <div class="dash reveal">
+      <div class="stat stat--streak">
+        <span class="stat__k">Tu racha</span>
+        <span class="stat__v"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2c1 3-1 4-1 6a3 3 0 0 0 6 0c0-1 0-2-.5-3 2 1.5 3.5 4 3.5 7a7 7 0 1 1-14 0c0-3.5 2.5-5.5 3-8 .4 2 1.5 2.7 3 2 .5-1.2 0-3-2-4z"/></svg><span id="dashStreak">0</span> <small>días seguidos</small></span>
+      </div>
+      <div class="stat">
+        <span class="stat__k">Sesiones hechas</span>
+        <span class="stat__v"><span id="dashDone">0</span><small>/ 10</small></span>
+      </div>
+      <div class="stat">
+        <span class="stat__k">Progreso</span>
+        <span class="stat__v"><span id="dashPct">0</span><small>%</small></span>
+      </div>
+      <div class="stat__cta">
+        <span class="stat__k" id="dashNextK">Empieza por aquí</span>
+        <b id="dashNextT">Día 1 — ¿Qué es la IA generativa?</b>
+        <button class="go-btn" id="dashGo">Empezar la sesión de hoy →</button>
+      </div>
+    </div>
+
+    <div class="cbanner" id="courseBanner">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+      <span id="courseBannerTxt"></span>
+    </div>
+
+    <!-- Progreso del curso -->
+    <div class="cprog reveal">
+      <div class="cprog__track"><div class="cprog__fill" id="cprogFill"></div></div>
+      <div class="cprog__cap"><span>Base · cualquiera empieza</span><span id="cprogCap">0 de 10 sesiones</span><span>Experto · método propio</span></div>
+    </div>
+
+    <!-- Lista de lecciones (inyectada por JS) -->
+    <div class="lessons reveal" id="courseList"></div>
+
+    <!-- Panel de lección (se rellena al abrir un día) -->
+    <div class="lpanel" id="lessonPanel" aria-live="polite"></div>
+
+    <div class="savenote">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>
+      <span id="saveNote">Tu progreso se guarda automáticamente en este navegador.</span>
+    </div>
+  </div>
+</section>
+
+<!-- GENERADOR DE VIDEO (IAFLOW) -->
+<section class="section" id="generador">
+  <div class="shead reveal">
+    <span class="eyebrow">Producción · IAFLOW</span>
+    <h2>Generador de paquete de producción de video</h2>
+    <p class="gp-lede">Convierte cualquier lección en un guion con el formato IAFLOW (gancho → promesa → pasos → repaso → cierre), su lista de tomas con texto en pantalla y personajes, y el prompt listo para pegar en tu herramienta de video. Todo se procesa en tu navegador.</p>
+  </div>
+
+  <div class="gp-grid reveal">
+    <!-- ENTRADA -->
+    <div class="gp-panel">
+      <span class="eyebrow">La lección</span>
+
+      <label class="gp-field" for="gpTitulo">Título del capítulo / día</label>
+      <input type="text" id="gpTitulo" placeholder="Día 2 · Cómo darle instrucciones claras a Claude">
+
+      <label class="gp-field" for="gpTema">Tema en una frase <span class="gp-hint">— qué se entiende al final</span></label>
+      <textarea id="gpTema" placeholder="cómo escribir buenas instrucciones (prompts) para mejores respuestas"></textarea>
+
+      <label class="gp-field" for="gpGancho">Gancho <span class="gp-hint">— una pregunta o dato que despierte curiosidad</span></label>
+      <textarea id="gpGancho" placeholder="¿Por qué la misma IA le da a unos respuestas geniales y a otros respuestas vagas?"></textarea>
+
+      <div id="gpIdeas"></div>
+      <button class="gp-btn gp-btn--add" id="gpAddIdea" type="button">+ Agregar idea (paso)</button>
+
+      <label class="gp-field" for="gpCierre" style="margin-top:14px">Cierre <span class="gp-hint">— una pregunta o acción para reflexionar</span></label>
+      <textarea id="gpCierre" placeholder="¿Qué tan específico fue tu último mensaje a una IA?"></textarea>
+
+      <div class="gp-row2">
+        <div>
+          <label class="gp-field" for="gpTecnica">Técnica de aprendizaje</label>
+          <select id="gpTecnica">
+            <option>Práctica de recuperación</option>
+            <option>Repetición espaciada</option>
+            <option>Ejemplos concretos</option>
+            <option>Codificación dual</option>
+          </select>
+        </div>
+        <div>
+          <label class="gp-field" for="gpPersonaje">Personaje narrador</label>
+          <input type="text" id="gpPersonaje" value="Flux">
+        </div>
+      </div>
+      <div class="gp-row2">
+        <div>
+          <label class="gp-field" for="gpDuracion">Duración</label>
+          <select id="gpDuracion"><option value="90">90 segundos</option><option value="360">6 minutos</option></select>
+        </div>
+        <div>
+          <label class="gp-field" for="gpFormato">Formato</label>
+          <select id="gpFormato"><option>16:9</option><option>9:16</option></select>
+        </div>
+      </div>
+
+      <div class="gp-actions">
+        <button class="gp-btn gp-btn--primary" id="gpGen" type="button">Generar paquete</button>
+        <button class="gp-btn" id="gpClear" type="button">Limpiar</button>
+      </div>
+      <div class="gp-err" id="gpErr"></div>
+    </div>
+
+    <!-- SALIDA -->
+    <div class="gp-panel">
+      <span class="eyebrow">El paquete</span>
+      <div id="gpEmpty" class="gp-empty">Aún no hay paquete. Completa la lección y pulsa <b>Generar paquete</b>.</div>
+      <div id="gpResult" style="display:none">
+        <div class="gp-meta" id="gpMeta"></div>
+        <div class="gp-block">
+          <div class="gp-block-top"><h3>Guion (voz en off)</h3><button class="gp-mini" data-gpcopy="gpScript">Copiar guion</button></div>
+          <textarea id="gpScript" class="gp-ta" spellcheck="false"></textarea>
+        </div>
+        <div class="gp-block">
+          <div class="gp-block-top"><h3>Lista de tomas</h3><span class="gp-hint">celdas editables</span></div>
+          <div class="gp-tablewrap">
+            <table class="gp-table" id="gpShots">
+              <thead><tr><th>Escena</th><th>Texto en pantalla</th><th>Visual / metáfora</th><th>Personaje · acción</th><th>Dur.</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="gp-block">
+          <div class="gp-block-top"><h3>Prompt para la herramienta</h3><button class="gp-mini" data-gpcopy="gpPrompt">Copiar prompt</button></div>
+          <textarea id="gpPrompt" class="gp-ta" spellcheck="false"></textarea>
+        </div>
+        <div class="gp-actions">
+          <button class="gp-btn gp-btn--primary" id="gpCopyAll" type="button">Copiar todo (Markdown)</button>
+          <button class="gp-btn" id="gpDownload" type="button">Descargar .md</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="gp-toast" id="gpToast">Copiado ✓</div>
+</section>
+
+<!-- GLOSARIO -->
+<section class="section section--tint" id="glosario">
+  <div class="shead reveal">
+    <span class="eyebrow">Referencia</span>
+    <h2>Glosario de IA</h2>
+    <p>El lenguaje del tema, en un solo lugar. Dentro del curso, los términos clave aparecen <span class="gloss-term" data-k="Así funciona" data-d="Pasa el cursor por encima (o tócalo en el móvil) para ver una definición rápida, como esta." tabindex="0">subrayados</span>: pasa el cursor por encima —o tócalos en el móvil— para ver una definición rápida. Y aquí tienes el glosario completo, con buscador.</p>
+  </div>
+  <div class="gloss-search reveal"><input id="glossSearch" type="search" placeholder="Buscar un término…" aria-label="Buscar en el glosario"></div>
+  <div class="gloss-grid reveal" id="glossGrid"></div>
+</section>
+
+<!-- FICHA DE LA INVESTIGACIÓN -->
+<section class="section" id="ficha">
+  <div class="shead reveal">
+    <span class="eyebrow">Documento base</span>
+    <h2>Ficha de la investigación</h2>
+    <p>El resumen técnico de todo lo que sigue: qué se buscó, con qué alcance, cómo se ordenó y de dónde sale la evidencia. Es la tarjeta de identidad de esta herramienta.</p>
+  </div>
+  <div class="ficha reveal">
+    <div class="ficha__card">
+      <div class="ficha__top">
+        <h3>Sistema integral de aprendizaje personalizado</h3>
+        <span class="ficha__stamp">Ficha técnica</span>
+      </div>
+      <div class="ficha__rows">
+        <div class="frow"><div class="frow__k">Objetivo</div><div class="frow__v">Reunir <strong>10 teorías de aprendizaje</strong> aplicables a cualquier materia o idioma, ordenarlas de la más general a la más exigente, encadenarlas y destilarlas en <strong>3 métodos esenciales</strong> que cubran todo el ciclo de aprender.</div></div>
+        <div class="frow"><div class="frow__k">Alcance</div><div class="frow__v">Teorías + entorno físico (clima, aire, música, luz, posición, horario) + estilo de vida (sueño, ejercicio, hidratación) + suplementos y fármacos con su nivel de evidencia + variables de edad y sexo + un <strong>perfil KYC</strong> que genera recomendaciones.</div></div>
+        <div class="frow"><div class="frow__k">Orden</div><div class="frow__v">Ascendente por <strong>dificultad de ejecución</strong>: 01–04 fundamentos accesibles, 05–07 mecánica de la memoria, 08–10 maestría. Cada teoría se "compagina" con la siguiente.</div></div>
+        <div class="frow"><div class="frow__k">Destilado</div><div class="frow__v">Síntesis 1 = teorías <strong>1–4</strong> · Síntesis 2 = teorías <strong>4–7</strong> · Síntesis 3 = teorías <strong>7–10</strong>. Las teorías 4 y 7 son "bisagras" que pertenecen a dos bloques (por eso los rangos se solapan).</div></div>
+        <div class="frow"><div class="frow__k">Metodología</div><div class="frow__v">Marco teórico clásico (Skinner, Piaget, Vygotsky, Ericsson, Sweller…) contrastado con evidencia empírica reciente: revisiones sistemáticas y metaanálisis 2013–2026 sobre suplementos y fármacos cognitivos.</div></div>
+        <div class="frow"><div class="frow__k">Evidencia</div><div class="frow__v">Cada afirmación lleva un nivel: <strong>Alta / Moderada / Baja / Preliminar</strong>. Lo que la ciencia respalda con fuerza se separa de lo que es prometedor pero incierto.</div></div>
+        <div class="frow"><div class="frow__k">Aviso</div><div class="frow__v">No sustituye consejo médico. Las recomendaciones de suplementos/fármacos son informativas; consulta con un profesional de la salud antes de tomar cualquier sustancia.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 TEORÍAS -->
+<section class="section section--tint" id="teorias">
+  <div class="shead reveal">
+    <span class="eyebrow">El ascenso · 01 → 10</span>
+    <h2>Las diez teorías, de la base a la cumbre</h2>
+    <p>Cada ficha incluye su principio, cómo aplicarlo, cómo se ve en idiomas, su nivel de dificultad y su evidencia. Al final de cada una, el puente que la conecta con la siguiente: así no son diez ideas sueltas, sino un solo camino.</p>
+  </div>
+  <div class="theories" id="theoryList"><!-- JS inyecta las teorías --></div>
+</section>
+
+<!-- 3 SÍNTESIS -->
+<section class="section" id="sintesis">
+  <div class="shead reveal">
+    <span class="eyebrow">El destilado</span>
+    <h2>Las tres síntesis: tu recorrido completo</h2>
+    <p>El punto medio entre las diez teorías son estos tres métodos. Juntos forman un ciclo de vida del aprendizaje: arrancas y codificas, consolidas en memoria duradera y, por último, dominas. Las teorías 4 y 7 actúan de bisagra entre etapas.</p>
+  </div>
+  <div class="pipe">
+    <article class="synth reveal">
+      <span class="synth__step">Etapa 1 · Arrancar</span>
+      <span class="synth__range">Mezcla de teorías 1 → 4</span>
+      <h3>Inmersión con hábito y codificación conectada</h3>
+      <span class="synth__sub">hábito + imágenes + lo previo + tu zona (i+1)</span>
+      <p>Creas un hábito diario con recompensa (1) y te expones a material justo por encima de tu nivel (4), codificándolo de forma rica —palabras con imágenes (2) y enlazado a lo que ya sabes (3)—, idealmente con apoyo (tutor, compañero o IA).</p>
+      <div class="synth__merge"><b>Resultado:</b> entras sin fricción y construyes una base que de verdad se queda.</div>
+    </article>
+    <article class="synth reveal">
+      <span class="synth__step">Etapa 2 · Consolidar</span>
+      <span class="synth__range">Mezcla de teorías 4 → 7</span>
+      <h3>Recuperación espaciada e intercalada</h3>
+      <span class="synth__sub">input + espaciar + recuperar + mezclar</span>
+      <p>Conviertes lo expuesto (4) en memoria duradera: repasas en intervalos crecientes (5), recuperas activamente con autoexamen en lugar de releer (6) y mezclas temas y habilidades (7). Es el combo con más respaldo empírico de toda la ciencia del aprendizaje.</p>
+      <div class="synth__merge"><b>Resultado:</b> lo aprendido deja de evaporarse y se vuelve flexible.</div>
+    </article>
+    <article class="synth reveal">
+      <span class="synth__step">Etapa 3 · Dominar</span>
+      <span class="synth__range">Mezcla de teorías 7 → 10</span>
+      <h3>Práctica deliberada autorregulada</h3>
+      <span class="synth__sub">mezclar + carga + práctica enfocada + metacognición</span>
+      <p>Con base sólida, atacas tus debilidades (9) en el límite de tu capacidad, gestionando la memoria de trabajo con chunking y ejemplos (8) y manteniendo la dificultad deseable del intercalado (7), todo dirigido por tu propia planificación y autoevaluación (10).</p>
+      <div class="synth__merge"><b>Resultado:</b> maestría, transferencia y autonomía para aprender lo que sea.</div>
+    </article>
+  </div>
+  <div class="pipe__flow reveal">
+    <b>Arrancar</b> <span>→</span> <b>Consolidar</b> <span>→</span> <b>Dominar</b> <span>↻</span> <span>(la metacognición reinicia el ciclo con intención)</span>
+  </div>
+</section>
+
+<!-- SUPLEMENTOS -->
+<section class="section section--tint" id="suplementos">
+  <div class="shead reveal">
+    <span class="eyebrow">Apoyo bioquímico</span>
+    <h2>Suplementos alimenticios y aprendizaje</h2>
+    <p>Lo que la evidencia respalda, separado de lo que es prometedor pero incierto. Ningún suplemento sustituye al sueño, la nutrición y el ejercicio: esos son los tres pilares con mayor efecto. Las dosis son rangos de la literatura, no una prescripción.</p>
+  </div>
+  <div class="caution reveal">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#CC6F4B" stroke-width="2"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+    <p><b>Antes de tomar nada:</b> consulta con un médico o farmacéutico, sobre todo si tomas medicación, estás embarazada/lactando o tienes alguna condición. La calidad de los suplementos varía mucho entre marcas.</p>
+  </div>
+  <div class="grid-cards" id="suppList"><!-- JS --></div>
+</section>
+
+<!-- FÁRMACOS -->
+<section class="section farmaco" id="farmacos">
+  <div class="shead reveal">
+    <span class="eyebrow">Solo informativo</span>
+    <h2>Fármacos y mejora cognitiva</h2>
+    <p>Información factual sobre sustancias que la gente usa para estudiar. No es una recomendación de uso: los fármacos de receta solo deben usarse bajo prescripción y para una condición diagnosticada. El uso "para rendir más" sin indicación médica conlleva riesgos reales, legales y de salud.</p>
+  </div>
+  <div class="caution reveal">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#CC6F4B" stroke-width="2"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+    <p><b>Importante:</b> los efectos en personas sanas suelen ser modestos y a veces empeoran tareas complejas o creativas. El balance entre beneficio y riesgo (dependencia, ansiedad, insomnio, efectos cardiovasculares) rara vez compensa. La base —dormir, moverse, espaciar— rinde más y sin coste.</p>
+  </div>
+  <div class="grid-cards" id="drugList"><!-- JS --></div>
+</section>
+
+<!-- ENTORNO -->
+<section class="section section--tint" id="entorno">
+  <div class="shead reveal">
+    <span class="eyebrow">Las condiciones</span>
+    <h2>Entorno y estilo de vida</h2>
+    <p>Dónde, cuándo y cómo estudias cambia cuánto aprendes. Aquí van los factores físicos y de hábitos, con un par de mitos desmentidos por el camino.</p>
+  </div>
+  <div class="env" id="envList"><!-- JS --></div>
+</section>
+
+<!-- EDAD Y SEXO -->
+<section class="section" id="demografia">
+  <div class="shead reveal">
+    <span class="eyebrow">El perfil biológico</span>
+    <h2>Edad y sexo</h2>
+    <p>Variables reales, pero con menos peso del que suele creerse. La regla de fondo: el cerebro conserva plasticidad toda la vida y la variación entre personas pesa más que cualquier promedio de grupo.</p>
+  </div>
+  <div class="demo">
+    <article class="card reveal">
+      <div class="card__head"><h3>Edad</h3><span class="badge badge--alto">Evidencia alta</span></div>
+      <p><strong>Infancia y adolescencia:</strong> máxima plasticidad y ventanas sensibles —sobre todo para el acento nativo de un idioma—, pero la función ejecutiva (planificar, inhibir) aún madura, así que conviene estructura externa.</p>
+      <p><strong>Adultez:</strong> aprendizaje algo más lento en lo "bruto", pero mejor estrategia, metacognición y conocimiento previo donde apoyarse. Se puede aprender cualquier cosa; cambia el método, no la posibilidad.</p>
+      <p><strong>Adultos mayores:</strong> procesamiento y memoria de trabajo más lentos, pero gran conocimiento cristalizado. Se benefician especialmente del espaciado, el ejercicio aeróbico y el aprendizaje social.</p>
+    </article>
+    <article class="card reveal">
+      <div class="card__head"><h3>Sexo</h3><span class="badge badge--bajo">Diferencias pequeñas</span></div>
+      <p>En promedio existen diferencias menores en ciertas tareas concretas, pero <strong>el solapamiento entre hombres y mujeres es enorme</strong>: saber el sexo de alguien predice muy poco sobre cómo aprenderá. La variación individual domina.</p>
+      <p>Las fluctuaciones hormonales (ciclo, embarazo, menopausia, andropausia) pueden afectar levemente la concentración y la memoria en algunos momentos, de forma muy individual.</p>
+      <p><strong>Conclusión práctica:</strong> diseña tu estrategia por tus datos personales —objetivo, nivel, horario, sueño, motivación—, no por estereotipos de género.</p>
+    </article>
+  </div>
+</section>
+
+<!-- PERFIL KYC -->
+<section class="section section--tint" id="perfil">
+  <div class="shead reveal">
+    <span class="eyebrow">Conoce a tu aprendiz · KYC</span>
+    <h2>Tu perfil → tu estrategia</h2>
+    <p>Responde el asistente <strong>una pregunta a la vez</strong>: la herramienta irá combinando las teorías, el entorno y tu estilo de vida en recomendaciones concretas. Cada sugerencia viene con un icono, su razón ("por qué te lo sugiero") y botones para <strong>aceptarla o descartarla</strong>: tú armas tu plan. Todo se procesa aquí en tu navegador; nada se envía a ningún sitio.</p>
+  </div>
+  <div class="profcard reveal" id="acctCard">
+    <div class="profcard__av" id="acctAv">?</div>
+    <div class="profcard__body" id="acctBody"><p class="profcard__hi" style="opacity:.5">Cargando…</p></div>
+  </div>
+  <div class="kyc">
+    <div class="kyc__card" id="wizard">
+      <div class="wiz__top">
+        <div class="wiz__meta">
+          <span class="wiz__step">Paso <b id="wizNow">1</b> de <span id="wizTotal">12</span></span>
+          <span class="wiz__label" id="wizLabel">Tu objetivo</span>
+        </div>
+        <div class="wiz__track" role="progressbar" aria-label="Progreso del asistente" aria-valuemin="1" aria-valuemax="12" aria-valuenow="1"><div class="wiz__fill" id="wizFill"></div></div>
+      </div>
+
+      <div class="wiz__stage">
+        <!-- Paso 1 · objetivo -->
+        <div class="step is-active" data-step="1" data-req="objetivo">
+          <div class="field">
+            <label>¿Qué quieres aprender?</label>
+            <div class="opts" data-group="objetivo" data-single="1">
+              <button class="opt" data-val="idioma">Un idioma</button>
+              <button class="opt" data-val="practica">Una habilidad práctica (instrumento, código, deporte)</button>
+              <button class="opt" data-val="concepto">Una materia conceptual (ciencia, historia)</button>
+              <button class="opt" data-val="examen">Aprobar un examen concreto</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paso 2 · nivel -->
+        <div class="step" data-step="2" data-req="nivel">
+          <div class="field">
+            <label>¿Cuál es tu nivel actual en ese tema?</label>
+            <div class="opts" data-group="nivel" data-single="1">
+              <button class="opt" data-val="principiante">Principiante / desde cero</button>
+              <button class="opt" data-val="intermedio">Intermedio</button>
+              <button class="opt" data-val="avanzado">Avanzado</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paso 3 · disponibilidad -->
+        <div class="step" data-step="3">
+          <div class="krow">
+            <div class="field">
+              <label>Horas al día que puedes dedicar</label>
+              <input class="kinput" id="horas" type="number" min="0.25" step="0.25" placeholder="Ej. 1.5" inputmode="decimal">
+            </div>
+            <div class="field">
+              <label>Días por semana</label>
+              <input class="kinput" id="dias" type="number" min="1" max="7" step="1" placeholder="Ej. 5" inputmode="numeric">
+            </div>
+          </div>
+        </div>
+
+        <!-- Paso 4 · cronotipo -->
+        <div class="step" data-step="4" data-req="cronotipo">
+          <div class="field">
+            <label>¿Cuándo rindes mejor? <span class="hint">Tu cronotipo: cuándo te sientes más despierto.</span></label>
+            <div class="opts" data-group="cronotipo" data-single="1">
+              <button class="opt" data-val="manana">Mañana</button>
+              <button class="opt" data-val="tarde">Tarde</button>
+              <button class="opt" data-val="noche">Noche</button>
+              <button class="opt" data-val="variable">Variable / no sé</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paso 5 · modalidad -->
+        <div class="step" data-step="5">
+          <div class="field">
+            <label>¿Cómo prefieres recibir la información? <span class="hint">Elige una o varias. Aprovecharemos tu preferencia, pero combinaremos canales: la evidencia dice que lo multimodal gana, y los "estilos de aprendizaje" fijos son un mito.</span></label>
+            <div class="opts" data-group="modal" data-single="0">
+              <button class="opt" data-val="visual">Viendo (imágenes, diagramas)</button>
+              <button class="opt" data-val="auditivo">Escuchando</button>
+              <button class="opt" data-val="lectura">Leyendo / escribiendo</button>
+              <button class="opt" data-val="practica">Haciendo / practicando</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paso 6 · plazo -->
+        <div class="step" data-step="6" data-req="plazo">
+          <div class="field">
+            <label>Plazo objetivo</label>
+            <div class="opts" data-group="plazo" data-single="1">
+              <button class="opt" data-val="corto">Tengo prisa (semanas)</button>
+              <button class="opt" data-val="medio">Unos meses</button>
+              <button class="opt" data-val="largo">Sin prisa / a largo plazo</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paso 7 · entorno -->
+        <div class="step" data-step="7" data-req="entorno">
+          <div class="field">
+            <label>Tu entorno de estudio habitual</label>
+            <div class="opts" data-group="entorno" data-single="1">
+              <button class="opt" data-val="silencio">Tranquilo y silencioso</button>
+              <button class="opt" data-val="ruidoso">Con ruido / interrupciones</button>
+              <button class="opt" data-val="variable">Cambia según el día</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paso 8 · sueño + ejercicio -->
+        <div class="step" data-step="8" data-req="sueno,ejercicio">
+          <div class="krow">
+            <div class="field">
+              <label>¿Cómo duermes?</label>
+              <div class="opts" data-group="sueno" data-single="1">
+                <button class="opt" data-val="buena">Bien (7–9 h)</button>
+                <button class="opt" data-val="regular">Regular</button>
+                <button class="opt" data-val="mala">Mal / poco</button>
+              </div>
+            </div>
+            <div class="field">
+              <label>¿Haces ejercicio?</label>
+              <div class="opts" data-group="ejercicio" data-single="1">
+                <button class="opt" data-val="si">Sí, regularmente</button>
+                <button class="opt" data-val="aveces">A veces</button>
+                <button class="opt" data-val="no">Casi nunca</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paso 9 · cafeína -->
+        <div class="step" data-step="9" data-req="cafeina">
+          <div class="field">
+            <label>¿Consumes cafeína?</label>
+            <div class="opts" data-group="cafeina" data-single="1">
+              <button class="opt" data-val="si">Sí, la tolero bien</button>
+              <button class="opt" data-val="sensible">Sí, pero me pone nervioso/a</button>
+              <button class="opt" data-val="no">No / la evito</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paso 10 · edad -->
+        <div class="step" data-step="10" data-req="edad">
+          <div class="field">
+            <label>Rango de edad</label>
+            <div class="opts" data-group="edad" data-single="1">
+              <button class="opt" data-val="joven">Menos de 18</button>
+              <button class="opt" data-val="a1830">18–30</button>
+              <button class="opt" data-val="a3050">30–50</button>
+              <button class="opt" data-val="a50">Más de 50</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paso 11 · motivación -->
+        <div class="step" data-step="11" data-req="motivacion">
+          <div class="field">
+            <label>Motivación principal</label>
+            <div class="opts" data-group="motivacion" data-single="1">
+              <button class="opt" data-val="intrinseca">Me gusta / por interés propio</button>
+              <button class="opt" data-val="extrinseca">Por obligación / una meta externa</button>
+              <button class="opt" data-val="mixta">Un poco de ambas</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paso 12 · condición (opcional) -->
+        <div class="step" data-step="12">
+          <div class="field">
+            <label>¿Algo que debamos tener en cuenta? <span class="hint">Opcional y sensible. Solo se usa para ajustar la estructura; no es un diagnóstico ni consejo médico.</span></label>
+            <div class="opts" data-group="condicion" data-single="0">
+              <button class="opt" data-val="atencion">Me cuesta concentrarme largo rato</button>
+              <button class="opt" data-val="ansiedad">Me bloqueo / me pongo nervioso/a al estudiar</button>
+              <button class="opt" data-val="ninguna">Nada en particular</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wiz__nav">
+        <button class="wiz__back" id="wizBack" disabled>← Atrás</button>
+        <span class="wiz__hintline" id="wizHint">Elige una opción para continuar</span>
+        <button class="wiz__next" id="wizNext" disabled>Siguiente →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULTADOS -->
+  <div class="plan" id="plan">
+    <div class="plan__head">
+      <h3>Tu estrategia personalizada</h3>
+      <p>Acepta lo que te encaje y descarta lo demás. Lo aceptado forma tu plan.</p>
+    </div>
+    <div class="plan__bar">
+      <span class="plan__count">En tu plan: <b id="count">0</b> recomendaciones</span>
+      <div>
+        <button class="mini-btn" id="acceptAll">Aceptar todo</button>
+        <button class="mini-btn" id="printPlan">Imprimir / guardar PDF</button>
+      </div>
+    </div>
+    <div id="recList"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="foot__in">
+    <h3>Sobre esta herramienta</h3>
+    <p>Es un material educativo que sintetiza teorías de aprendizaje y evidencia publicada. No es consejo médico, psicológico ni educativo individualizado. Las recomendaciones sobre sueño, ejercicio, suplementos o fármacos son informativas: consulta con un profesional de la salud antes de cambiar tu medicación o empezar a tomar cualquier sustancia. La eficacia de cualquier método depende de la constancia y de tu contexto.</p>
+    <div class="foot__sources">
+      FUENTES CLAVE (evidencia empírica)<br>
+      · Cafeína + L-teanina: revisiones y ECA sobre atención y tiempo de reacción (Br J Nutr 2025; PMC 2025)<br>
+      · Omega-3 (EPA/DHA): metaanálisis dosis-respuesta, efecto mixto/dependiente de dosis (Sci Rep 2025)<br>
+      · Creatina: metaanálisis con efecto global no concluyente; posible beneficio en memoria/estrés (Front Nutr 2024–25)<br>
+      · Bacopa monnieri: metaanálisis de ECA, mejora en recuerdo libre con uso crónico (≥12 sem)<br>
+      · Modafinilo: revisión sistemática, beneficio modesto en función ejecutiva en personas no privadas de sueño (Eur Neuropsychopharmacol 2015)<br>
+      · Marco teórico: Skinner, Piaget, Bruner, Vygotsky, Krashen, Ebbinghaus, Roediger &amp; Karpicke, Rohrer &amp; Bjork, Sweller, Ericsson, Flavell, Zimmerman.
+    </div>
+    <p style="margin-top:18px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;color:var(--niebla-2)">AtlasApex.guru · Método IAFLOW · <b style="color:var(--ambar)">v2.6</b> · Un método para convertir cualquier tema en un curso</p>
+  </div>
+</footer>
+
+<script>
+/* ====================== DATOS: 10 TEORÍAS ====================== */
+const theories = [
+  {n:"01",name:"Conductismo y aprendizaje por refuerzo",author:"Pavlov · Thorndike · Skinner",diff:1,
+   principle:"La conducta de estudiar se moldea con estímulos, repetición y consecuencias. Lo que se refuerza, se repite.",
+   how:"Rutina fija (señal → estudio → recompensa), microrrecompensas, rachas y repetición de las respuestas correctas.",
+   lang:"Drills, flashcards con recompensa y apps con rachas (tipo Duolingo); repetición de patrones hasta automatizar.",
+   ev:"Sólida para crear hábitos · insuficiente por sí sola para la comprensión profunda",
+   bridge:"El refuerzo genera el hábito y la exposición. El siguiente paso es que esa exposición se grabe mejor usando varios canales."},
+  {n:"02",name:"Doble codificación y aprendizaje multimedia",author:"Paivio · Mayer",diff:1,
+   principle:"Recordamos mejor cuando combinamos palabras con imágenes: dos rutas mentales superan a una.",
+   how:"Dibujos, mapas, diagramas; asociar cada idea a una imagen; no saturar la pantalla de texto.",
+   lang:"Vocabulario con imágenes (no traducción), gestos y mapas semánticos para fijar significado.",
+   ev:"Robusta (principios multimedia de Mayer)",
+   bridge:"Codificar con imágenes ya enlaza lo nuevo con lo conocido. El constructivismo lleva esa idea más lejos: construir sobre lo que ya sabes."},
+  {n:"03",name:"Constructivismo",author:"Piaget · Bruner",diff:2,
+   principle:"Quien aprende construye el conocimiento activamente, conectando lo nuevo con sus esquemas previos. Se aprende haciendo y descubriendo.",
+   how:"Relacionar con lo que ya sabes, proyectos, resolver problemas reales y explicar con tus propias palabras.",
+   lang:"Aprender en contexto y uso real, no reglas aisladas; descubrir patrones por ti mismo.",
+   ev:"Fuerte como marco · el descubrimiento puro sin guía es menos eficiente (ver carga cognitiva)",
+   bridge:"Construyes mejor cuando alguien o algo te guía en tu punto justo. Vygotsky añade el apoyo social y la idea del 'i+1'."},
+  {n:"04",name:"Constructivismo social, andamiaje e input comprensible",author:"Vygotsky · Krashen",diff:3,hinge:"Bisagra 1↔2",
+   principle:"Aprendemos en la zona de desarrollo próximo: un poco por encima de lo actual, con apoyo que se retira poco a poco. En idiomas: input comprensible (i+1).",
+   how:"Tutor o compañero, materiales un punto sobre tu nivel y ayuda (andamiaje) que va desapareciendo conforme avanzas.",
+   lang:"Input comprensible (escucha/lectura un poco arriba), conversación con hablantes y producción para forzar el avance.",
+   ev:"Muy influyente · el input comprensible es pilar en la adquisición de idiomas",
+   bridge:"Una vez que entiendes en tu zona, el reto pasa a no olvidar. La repetición espaciada combate la curva del olvido."},
+  {n:"05",name:"Repetición espaciada",author:"Ebbinghaus · Cepeda et al.",diff:3,
+   principle:"Repasar en intervalos crecientes vence al olvido mucho mejor que amontonar todo de golpe (cramming).",
+   how:"Sistemas de repetición espaciada (Anki) que te hacen repasar justo antes de que ibas a olvidar.",
+   lang:"Vocabulario y gramática en un SRS: es la herramienta más rentable para retener léxico.",
+   ev:"De las más sólidas de toda la ciencia del aprendizaje",
+   bridge:"Espaciar dice CUÁNDO repasar. La práctica de recuperación dice CÓMO: recuperando de memoria, no releyendo."},
+  {n:"06",name:"Práctica de recuperación (efecto del test)",author:"Roediger · Karpicke",diff:3,
+   principle:"Recuperar algo de memoria (autoexaminarte) fortalece el recuerdo más que volver a leerlo. El esfuerzo de recordar es el que enseña.",
+   how:"Tarjetas, preguntas, cerrar el libro y recordar, explicar de memoria a otra persona.",
+   lang:"Recordar palabras sin pistas, hablar sin notas y producir frases desde cero.",
+   ev:"Muy sólida (uno de los efectos más replicados)",
+   bridge:"Si además mezclas lo que recuperas en vez de hacerlo en bloques, distingues mejor unas ideas de otras. El intercalado potencia la recuperación."},
+  {n:"07",name:"Intercalado y dificultades deseables",author:"Rohrer · Bjork",diff:4,hinge:"Bisagra 2↔3",
+   principle:"Alternar temas y tipos de problema —en lugar de practicar en bloques— mejora la discriminación y la transferencia, aunque se sienta más difícil.",
+   how:"Mezclar tipos de ejercicios y variar contextos; aceptar que la sensación de dificultad es señal de que funciona.",
+   lang:"Mezclar tiempos verbales y alternar escuchar / hablar / leer / escribir en una misma sesión.",
+   ev:"Sólida para discriminación y transferencia",
+   bridge:"Mezclar añade carga mental. Para que no abrume hay que gestionar la memoria de trabajo: ahí entra la teoría de la carga cognitiva."},
+  {n:"08",name:"Teoría de la carga cognitiva",author:"Sweller",diff:4,
+   principle:"La memoria de trabajo es muy limitada. Hay que reducir la carga inútil y construir esquemas mediante chunking y ejemplos resueltos.",
+   how:"Trocear, estudiar ejemplos resueltos antes de lanzarte a los problemas, quitar distractores y automatizar lo básico.",
+   lang:"Frases modelo y fragmentos (chunks); dominar lo básico hasta que salga solo y libere recursos mentales.",
+   ev:"Sólida",
+   bridge:"Cuando lo básico es automático y la carga está controlada, puedes dedicar recursos a practicar deliberadamente tus puntos débiles."},
+  {n:"09",name:"Práctica deliberada",author:"Ericsson",diff:5,
+   principle:"La mejora experta no es 'más horas': es práctica enfocada en tus debilidades, en el límite de tu capacidad, con feedback inmediato y repetición.",
+   how:"Objetivos muy específicos, trabajar lo que NO dominas, buscar feedback, corregir y repetir el punto exacto que falla.",
+   lang:"Aislar sonidos o estructuras difíciles, grabarte para detectar errores y recibir corrección de un experto.",
+   ev:"Fuerte en dominios bien estructurados · la regla de '10.000 horas' es una simplificación",
+   bridge:"La práctica deliberada necesita que TÚ planifiques, monitorees y ajustes. Eso es metacognición y autorregulación."},
+  {n:"10",name:"Metacognición y aprendizaje autorregulado",author:"Flavell · Zimmerman",diff:5,
+   principle:"Aprender a aprender: planificar, monitorear, evaluar y ajustar tu propio proceso. Es pensar sobre tu pensamiento.",
+   how:"Fijar metas, autoevaluarte, detectar qué falla, cambiar de estrategia y llevar un diario de aprendizaje.",
+   lang:"Evaluar tu nivel real, identificar tus errores recurrentes y decidir conscientemente el siguiente paso.",
+   ev:"Fuerte · predice el rendimiento a largo plazo",
+   bridge:"Cierra el ciclo: la metacognición decide qué codificar, cuándo espaciar y qué practicar. Vuelve a la teoría 01, ahora con intención."}
+];
+
+function diffDots(level){
+  let d="";
+  for(let i=1;i<=5;i++){ d+=`<span class="diff__dot ${i<=level?'on':''}"></span>`; }
+  const labels={1:"Entrada",2:"Accesible",3:"Intermedia",4:"Exigente",5:"Avanzada"};
+  return `<span class="diff">Dificultad <span class="diff__dots">${d}</span> ${labels[level]}</span>`;
+}
+
+document.getElementById('theoryList').innerHTML = theories.map(t=>`
+  <article class="theory reveal">
+    ${t.hinge?`<span class="hinge">${t.hinge}</span>`:""}
+    <div class="theory__head">
+      <span class="theory__num">${t.n}</span>
+      <div class="theory__titles">
+        <h3 class="theory__name">${t.name}</h3>
+        <span class="theory__author">${t.author}</span>
+      </div>
+      ${diffDots(t.diff)}
+    </div>
+    <div class="theory__grid">
+      <div class="tblock"><div class="tblock__k">Principio</div><p>${t.principle}</p></div>
+      <div class="tblock"><div class="tblock__k">Cómo aplicarlo</div><p>${t.how}</p></div>
+      <div class="tblock tblock--lang"><div class="tblock__k">En idiomas</div><p>${t.lang}</p></div>
+      <div class="tblock"><div class="tblock__k">Evidencia</div><p><span class="tag-ev">${t.ev}</span></p></div>
+    </div>
+    <div class="bridge"><div class="bridge__k">Cómo se compagina con la siguiente →</div><p>${t.bridge}</p></div>
+  </article>
+`).join('');
+
+/* ====================== DATOS: SUPLEMENTOS ====================== */
+const supplements = [
+  {name:"Cafeína + L-teanina",lvl:"alto",lblt:"Evidencia alta",
+   txt:"La combinación más fiable para el estudio: la cafeína sube el estado de alerta y la L-teanina suaviza los nervios y reduce la mente dispersa. Juntas mejoran la atención sostenida y el tiempo de reacción.",
+   dose:"≈ 40–160 mg cafeína + 100–200 mg L-teanina · evita la cafeína 8–10 h antes de dormir"},
+  {name:"Omega-3 (EPA/DHA)",lvl:"mod",lblt:"Evidencia moderada",
+   txt:"Componente estructural del cerebro. Su efecto como 'potenciador' en personas ya sanas es mixto y depende de la dosis; el beneficio es más claro si tu dieta es pobre en pescado o tomas dosis altas.",
+   dose:"≈ 1–2 g/día de EPA+DHA · efecto gradual a lo largo de semanas"},
+  {name:"Creatina monohidrato",lvl:"prelim",lblt:"Prometedor / incierto",
+   txt:"Conocida por el músculo, también aporta energía a la neurona. El efecto cognitivo global aún no es concluyente, pero parece ayudar más a la memoria bajo estrés, falta de sueño o en dietas vegetarianas.",
+   dose:"≈ 3–5 g/día · de las más estudiadas en seguridad"},
+  {name:"Bacopa monnieri",lvl:"mod",lblt:"Evidencia moderada",
+   txt:"Planta con respaldo en metaanálisis para mejorar el recuerdo libre y la velocidad de atención. Su efecto es lento: hace falta uso constante durante semanas para notarlo.",
+   dose:"≈ 300 mg/día de extracto estandarizado · 8–12 semanas · posible molestia digestiva"},
+  {name:"Rhodiola rosea",lvl:"bajo",lblt:"Evidencia baja",
+   txt:"Adaptógeno usado contra la fatiga mental y el estrés. Puede ayudar a sostener el rendimiento cuando estás agotado, pero la evidencia cognitiva directa es limitada e inconsistente.",
+   dose:"≈ 200–400 mg/día de extracto estandarizado"},
+  {name:"Corregir déficits (B12, D, hierro)",lvl:"alto",lblt:"Evidencia alta",
+   txt:"No es 'doping': si te falta vitamina B12, vitamina D o hierro, tu cognición se resiente. Corregir una carencia real mejora memoria y concentración; suplementar sin déficit no añade nada.",
+   dose:"Solo con análisis previo y guía profesional"}
+];
+const badgeClass={alto:"badge--alto",mod:"badge--mod",bajo:"badge--bajo",prelim:"badge--prelim"};
+document.getElementById('suppList').innerHTML = supplements.map(s=>`
+  <article class="card reveal">
+    <div class="card__head"><h3>${s.name}</h3><span class="badge ${badgeClass[s.lvl]}">${s.lblt}</span></div>
+    <p>${s.txt}</p>
+    <span class="card__dose">${s.dose}</span>
+  </article>
+`).join('');
+
+/* ====================== DATOS: FÁRMACOS ====================== */
+const drugs = [
+  {name:"Cafeína",lvl:"alto",lblt:"Seguro y eficaz",
+   txt:"El estimulante cognitivo mejor estudiado y más accesible. Bloquea la adenosina: sube alerta, atención y vigilia. Tolerancia y dependencia leve; el exceso da ansiedad e insomnio. Es el 'fármaco' de estudio más razonable.",
+   dose:"Uso común en café/té · mejor combinada con L-teanina"},
+  {name:"Modafinilo",lvl:"prelim",lblt:"Receta · solo informativo",
+   txt:"Promotor de la vigilia aprobado para la narcolepsia. En personas no privadas de sueño aporta un beneficio modesto en función ejecutiva y atención, sobre todo en tareas complejas, pero los resultados son mixtos. Riesgos: insomnio, ansiedad, dolor de cabeza y, raramente, reacciones cutáneas graves.",
+   dose:"Requiere prescripción y supervisión médica · uso fuera de indicación con riesgos legales y de salud"},
+  {name:"Estimulantes para TDAH (metilfenidato, anfetaminas)",lvl:"prelim",lblt:"Receta · solo informativo",
+   txt:"Tratamiento eficaz para el TDAH diagnosticado. Como 'pastilla para estudiar' en personas sanas, el beneficio real es pequeño e inconsistente y a veces empeora tareas complejas o creativas. Riesgos serios: dependencia, efectos cardiovasculares, ansiedad y alteración del sueño.",
+   dose:"Solo bajo prescripción para una condición diagnosticada · su uso sin receta es ilegal y peligroso"},
+  {name:"Nicotina",lvl:"bajo",lblt:"Alto riesgo · no recomendado",
+   txt:"Mejora puntualmente la atención, pero es una de las sustancias más adictivas que existen y conlleva graves riesgos para la salud. El pequeño efecto cognitivo no compensa de ninguna manera el coste.",
+   dose:"No recomendado como ayuda al estudio bajo ningún formato"}
+];
+document.getElementById('drugList').innerHTML = drugs.map(d=>`
+  <article class="card reveal">
+    <div class="card__head"><h3>${d.name}</h3><span class="badge ${badgeClass[d.lvl]}">${d.lblt}</span></div>
+    <p>${d.txt}</p>
+    <span class="card__dose">${d.dose}</span>
+  </article>
+`).join('');
+
+/* ====================== DATOS: ENTORNO ====================== */
+const ico = {
+  temp:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>',
+  air:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.6 4.6A2 2 0 1 1 11 8H2M12.6 19.4A2 2 0 1 0 14 16H2M17.7 7.7A2.5 2.5 0 1 1 19.5 12H2"/></svg>',
+  music:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>',
+  light:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V18h6v-1.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2z"/></svg>',
+  pos:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="2"/><path d="M12 7v6m0 0-3 7m3-7 3 7M7 11h10"/></svg>',
+  time:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+  sleep:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>',
+  ex:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6.5 6.5 17.5 17.5M3 10l1-1m16 5 1-1M7 4 4 7m13 13 3-3M9 12l3-3m-1 4 3-3"/></svg>',
+  water:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.7S5 10 5 14.5a7 7 0 0 0 14 0C19 10 12 2.7 12 2.7z"/></svg>'
+};
+const env = [
+  {icon:ico.temp,t:"Clima y temperatura",p:"El rendimiento cae con el calor o el frío excesivos. La zona cómoda ronda los 20–22 °C. Si pasas calor, ventila o baja la temperatura antes de tareas exigentes."},
+  {icon:ico.air,t:"Aire y ventilación",p:"El CO₂ acumulado en habitaciones cerradas empeora la concentración y la toma de decisiones. Ventila con frecuencia; el aire fresco rinde más que cualquier suplemento."},
+  {icon:ico.music,t:"Música",p:"Para tareas verbales (leer, escribir, idiomas), la música con letra estorba; el silencio o el sonido instrumental/ambiental funcionan mejor. El ruido blanco ayuda a algunas personas a aislarse.",myth:"El 'efecto Mozart' como subida de CI es un mito"},
+  {icon:ico.light,t:"Luz",p:"Luz natural y suficiente brillo mantienen la alerta. La luz fría/diurna activa por la mañana; evita el deslumbramiento y la fatiga visual. La luz azul por la noche dificulta dormir."},
+  {icon:ico.pos,t:"Posición y movimiento",p:"Estudiar erguido o de pie favorece la alerta más que tumbado. Evita la cama (tu cerebro la asocia al sueño). Pausas activas y caminar reactivan la atención."},
+  {icon:ico.time,t:"Horario y cronotipo",p:"Coloca lo más difícil en tu pico de energía (mañana o noche según tu cronotipo). Reparte en sesiones cortas (tipo Pomodoro) en lugar de un maratón único."},
+  {icon:ico.sleep,t:"Sueño",p:"El factor con MÁS impacto. El sueño consolida la memoria: dormir poco arruina lo estudiado. Un repaso ligero antes de dormir ayuda a fijar; material nuevo y pesado, no.",myth:"Sacrificar sueño para estudiar es contraproducente"},
+  {icon:ico.ex,t:"Ejercicio",p:"El ejercicio aeróbico aumenta el BDNF y favorece la memoria y el hipocampo. Una caminata o sesión suave antes o después de estudiar mejora la retención."},
+  {icon:ico.water,t:"Hidratación y nutrición",p:"La deshidratación leve ya reduce atención y memoria. Bebe agua, evita comidas muy pesadas justo antes de estudiar y mantén glucosa estable para el cerebro."}
+];
+document.getElementById('envList').innerHTML = env.map(e=>`
+  <article class="env__item reveal">
+    <span class="env__icon">${e.icon}</span>
+    <h3>${e.t}</h3>
+    <p>${e.p}</p>
+    ${e.myth?`<span class="mythbust">⚑ ${e.myth}</span>`:""}
+  </article>
+`).join('');
+
+/* ====================== KYC: selección ====================== */
+const profile = {modal:[],condicion:[]};
+document.querySelectorAll('.opts').forEach(group=>{
+  const key=group.dataset.group, single=group.dataset.single==="1";
+  group.querySelectorAll('.opt').forEach(btn=>{
+    btn.setAttribute('aria-pressed','false');
+    btn.addEventListener('click',()=>{
+      const val=btn.dataset.val;
+      if(single){
+        group.querySelectorAll('.opt').forEach(b=>b.setAttribute('aria-pressed','false'));
+        btn.setAttribute('aria-pressed','true');
+        profile[key]=val;
+      } else {
+        const on=btn.getAttribute('aria-pressed')==='true';
+        btn.setAttribute('aria-pressed', on?'false':'true');
+        if(!profile[key]) profile[key]=[];
+        if(on){ profile[key]=profile[key].filter(v=>v!==val); }
+        else { profile[key].push(val); }
+      }
+    });
+  });
+});
+
+/* ====================== MOTOR DE RECOMENDACIONES ====================== */
+const RICON = {
+  route:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="19" r="2.5"/><circle cx="18" cy="5" r="2.5"/><path d="M8 19h6a4 4 0 0 0 0-8H9a4 4 0 0 1 0-8h7"/></svg>',
+  clock:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+  brain:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3a3 3 0 0 0-3 3 3 3 0 0 0-1 5.8A3 3 0 0 0 7 17a2.5 2.5 0 0 0 5 .5V5a2 2 0 0 0-3-2zM15 3a3 3 0 0 1 3 3 3 3 0 0 1 1 5.8A3 3 0 0 1 17 17a2.5 2.5 0 0 1-5 .5"/></svg>',
+  cards:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="13" height="16" rx="2"/><path d="M8 5V3h13v16h-2"/></svg>',
+  home:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>',
+  heart:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 5.7a5 5 0 0 0-7-.2L12 6l-.1-.5a5 5 0 0 0-7 7L12 20l7.1-7.4a5 5 0 0 0-.1-6.9z"/></svg>',
+  leaf:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 20A7 7 0 0 1 4 13c0-6 7-9 16-9 0 9-3 16-9 16z"/><path d="M4 20c2-4 5-7 9-9"/></svg>',
+  target:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4"/></svg>',
+  shield:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg>'
+};
+
+function buildRecs(p){
+  const recs=[];
+  const horas=parseFloat(document.getElementById('horas').value)||0;
+  const dias=parseInt(document.getElementById('dias').value)||0;
+  const esIdioma = p.objetivo==='idioma';
+
+  /* 1 · método dominante según nivel */
+  if(p.nivel==='principiante'){
+    recs.push({icon:RICON.route,phase:"Etapa 1 · Arrancar",title:"Empieza por la inmersión con hábito y codificación",
+      body:"Tu prioridad es <b>arrancar sin fricción</b>: monta un hábito diario con una pequeña recompensa y expónte a material un punto por encima de tu nivel, fijándolo con imágenes y conectándolo a lo que ya sabes. No persigas todavía la perfección.",
+      why:`Eres principiante: la Síntesis 1 (teorías 1–4) está diseñada justo para esta fase. Antes de optimizar la memoria hay que crear exposición y el hábito que la sostiene.`});
+  } else if(p.nivel==='intermedio'){
+    recs.push({icon:RICON.brain,phase:"Etapa 2 · Consolidar",title:"Pon el foco en la recuperación espaciada e intercalada",
+      body:"Ya tienes base: ahora toca que <b>no se evapore</b>. Repasa en intervalos crecientes, autoexamínate en vez de releer y mezcla temas y habilidades en cada sesión.",
+      why:"En nivel intermedio el cuello de botella es la retención, no la exposición. La Síntesis 2 (teorías 4–7) es el combo con más respaldo empírico para fijar lo aprendido."});
+  } else if(p.nivel==='avanzado'){
+    recs.push({icon:RICON.target,phase:"Etapa 3 · Dominar",title:"Pasa a la práctica deliberada autorregulada",
+      body:"Para subir de avanzado a experto, deja de 'repasar de todo' y <b>ataca tus debilidades concretas</b> en el límite de tu capacidad, con feedback, gestionando la carga con ejemplos y fragmentos, y dirigido por tu propia autoevaluación.",
+      why:"En nivel avanzado los repasos generales rinden poco. La Síntesis 3 (teorías 7–10) concentra el esfuerzo donde de verdad mueve la aguja."});
+  }
+
+  /* 2 · sesiones y horario */
+  let dur = horas>0 ? Math.max(15, Math.min(50, Math.round((horas*60)/Math.max(1,Math.ceil(horas*1.3))/5)*5)) : 25;
+  let bloques = horas>0 ? Math.max(1, Math.round(horas*60/dur)) : 2;
+  const cron = {manana:"a primera hora de la mañana",tarde:"por la tarde",noche:"por la noche",variable:"en tu momento más despierto del día"}[p.cronotipo||'variable'];
+  recs.push({icon:RICON.clock,phase:"Ritmo de estudio",title:`Trabaja en bloques de ~${dur} min, ${cron}`,
+    body:`${horas>0?`Con ~${horas} h al día, reparte en unos <b>${bloques} bloque(s) de ${dur} min</b> con descansos breves`:`Usa <b>bloques de ${dur} min</b> con descansos breves`}, en lugar de un único maratón. ${dias>0&&dias<3?`Como estudias pocos días, haz cada sesión cuente y añade un mini-repaso de 5 min los demás días.`:`Mantén la regularidad: la constancia pesa más que las sesiones largas y aisladas.`}`,
+    why:`Reservar lo exigente para tu pico de energía (${cron}) aprovecha tu cronotipo, y trocear el tiempo respeta los límites de la atención y de la memoria de trabajo (carga cognitiva).`});
+
+  /* 3 · codificación según preferencia */
+  const modal=p.modal||[];
+  let codTxt, codWhy;
+  if(modal.includes('visual')){ codTxt="Apóyate en <b>diagramas, mapas e imágenes</b> para fijar cada idea, pero acompáñalas siempre de la palabra o el sonido."; }
+  else if(modal.includes('auditivo')){ codTxt="Aprovecha el <b>input por audio</b> (escuchar, repetir en voz alta, podcasts), combinándolo con apoyo visual o escrito."; }
+  else if(modal.includes('practica')){ codTxt="Aprende <b>haciendo</b>: produce, construye y practica desde el primer día, no solo consumas teoría."; }
+  else if(modal.includes('lectura')){ codTxt="Usa la <b>elaboración escrita</b>: reescribe con tus palabras y explícate por escrito, sumando algún apoyo visual."; }
+  else { codTxt="Codifica de forma <b>multimodal</b>: combina ver, escuchar y hacer para grabar mejor cada idea."; }
+  codWhy = "Respetamos tu preferencia, pero añadimos otros canales a propósito: la doble codificación (palabra + imagen) y la práctica multimodal superan a usar un solo canal. Los 'estilos de aprendizaje' fijos no tienen respaldo científico.";
+  recs.push({icon:RICON.brain,phase:"Cómo codificar",title:"Codifica combinando varios canales",body:codTxt,why:codWhy});
+
+  /* 4 · espaciado + recuperación (siempre) */
+  const plazoTxt = p.plazo==='corto' ? "Como tienes prisa, programa repasos más juntos al principio y autoexamínate a diario."
+    : p.plazo==='largo' ? "Con plazo amplio, deja crecer bien los intervalos: es donde la repetición espaciada brilla."
+    : "Ajusta los intervalos a tus meses disponibles y autoexamínate varias veces por semana.";
+  recs.push({icon:RICON.cards,phase:"Memoria",title:esIdioma?"Monta un sistema de repetición espaciada para el léxico":"Usa repetición espaciada + autoexamen",
+    body:`${esIdioma?"Para un idioma, un SRS (tipo Anki) para vocabulario y estructuras es la herramienta más rentable que existe. ":""}Sustituye releer por <b>recuperar de memoria</b>: tarjetas, preguntas y explicar sin mirar. ${plazoTxt}`,
+    why:"La repetición espaciada (teoría 5) y la práctica de recuperación (teoría 6) son dos de los efectos mejor demostrados de toda la ciencia del aprendizaje. Juntos multiplican la retención frente a estudiar de golpe."});
+
+  /* 5 · entorno */
+  let envTxt = "Estudia en un sitio bien ventilado, a ~20–22 °C y con buena luz.";
+  if(p.entorno==='ruidoso'){ envTxt+=" Como tu entorno tiene ruido, prueba <b>auriculares con cancelación</b> o ruido blanco/marrón, y reserva las tareas verbales (idiomas, lectura) para los ratos más silenciosos."; }
+  else if(p.entorno==='variable'){ envTxt+=" Como tu entorno cambia, ten un <b>plan B portátil</b> (auriculares, app offline) para mantener el hábito aunque el lugar no sea ideal."; }
+  else { envTxt+=" Aprovecha que tienes silencio para las tareas que más concentración piden."; }
+  if(p.objetivo==='idioma'||p.modal && !p.modal.includes('visual')){ envTxt+=" Para tareas verbales, mejor silencio o sonido instrumental que música con letra."; }
+  recs.push({icon:RICON.home,phase:"Entorno",title:"Prepara el espacio antes de empezar",body:envTxt,
+    why:"La temperatura, la ventilación (CO₂) y el ruido afectan de forma medible a la atención y la memoria. Ajustarlos es una mejora gratis y de las más rentables."});
+
+  /* 6 · sueño (prioridad si malo) */
+  if(p.sueno==='mala'){
+    recs.push({icon:RICON.heart,phase:"Prioridad #1",title:"Arregla el sueño antes que cualquier otra cosa",
+      body:"Dormir mal está saboteando tu aprendizaje más que cualquier técnica. <b>Prioriza 7–9 h</b>: el sueño es cuando el cerebro consolida lo estudiado. Un repaso ligero antes de dormir ayuda a fijar; material nuevo y pesado a última hora, no.",
+      why:"El sueño es el factor con mayor impacto sobre la memoria de toda la lista. Sin él, el resto del plan rinde a medias. Por eso va primero."});
+  } else if(p.sueno==='regular'){
+    recs.push({icon:RICON.heart,phase:"Estilo de vida",title:"Protege y aprovecha tu sueño",
+      body:"Intenta estabilizar tus 7–9 h y usa un <b>repaso ligero antes de dormir</b> para que la consolidación nocturna trabaje a tu favor.",
+      why:"El sueño consolida la memoria. Cuidarlo es de las palancas más potentes y baratas para aprender mejor."});
+  }
+
+  /* 7 · ejercicio */
+  if(p.ejercicio==='no'){
+    recs.push({icon:RICON.leaf,phase:"Estilo de vida",title:"Añade algo de ejercicio aeróbico ligero",
+      body:"No hace falta el gimnasio: una <b>caminata rápida</b> antes o después de estudiar ya ayuda. El movimiento mejora la memoria y la atención.",
+      why:"El ejercicio aeróbico aumenta el BDNF y favorece el hipocampo, mejorando la consolidación. Es un potenciador cognitivo real y sin efectos secundarios."});
+  }
+
+  /* 8 · cafeína */
+  if(p.cafeina==='si'){
+    recs.push({icon:RICON.leaf,phase:"Apoyo bioquímico",title:"Usa la cafeína con cabeza (mejor con L-teanina)",
+      body:"Tómala antes de un bloque exigente, no de forma continua, y <b>evítala 8–10 h antes de dormir</b>. Combinarla con L-teanina suaviza los nervios y mejora la atención sostenida.",
+      why:"Cafeína + L-teanina es la combinación con mejor evidencia para el estudio: sube la alerta sin tanta inquietud. Pero protegerla del sueño es clave para no perder por un lado lo que ganas por otro."});
+  } else if(p.cafeina==='sensible'){
+    recs.push({icon:RICON.leaf,phase:"Apoyo bioquímico",title:"Si la cafeína te altera, baja la dosis y suma L-teanina",
+      body:"Prueba <b>dosis pequeñas</b> o té en lugar de café, y considera la L-teanina, que reduce el componente nervioso de la cafeína.",
+      why:"La L-teanina atenúa la inquietud que provoca la cafeína manteniendo el beneficio en atención. Si igual te pone mal, no la fuerces: el sueño y el ejercicio rinden más."});
+  }
+
+  /* 9 · suplemento opcional (conservador) */
+  let supTxt, supWhy;
+  if(p.edad==='a50'){ supTxt="A partir de los 50, prioriza <b>omega-3</b> (si tu dieta lleva poco pescado) y, sobre todo, ejercicio y vida social. Revisa con tu médico posibles déficits de B12 o vitamina D."; supWhy="Con la edad, corregir carencias reales y sostener el omega-3 y el ejercicio tiene más respaldo que cualquier 'potenciador'. Siempre con análisis y guía profesional."; }
+  else if(p.sueno==='mala' || (p.condicion&&p.condicion.includes('atencion'))){ supTxt="Antes de pensar en suplementos, ataca el sueño y la estructura de estudio. Si aun así quieres apoyo puntual, <b>cafeína + L-teanina</b> es lo más respaldado."; supWhy="Ningún suplemento compensa el sueño insuficiente o la falta de método. Lo más sensato es resolver primero la base."; }
+  else { supTxt="Como apoyo opcional: <b>omega-3</b> (estructura cerebral) y, si buscas memoria y tienes paciencia, <b>Bacopa monnieri</b> (efecto lento, semanas). Nada de esto es imprescindible."; supWhy="Son los suplementos con evidencia razonable, pero su efecto es modesto y nunca sustituye dormir, comer y moverte bien. Consulta antes con un profesional."; }
+  recs.push({icon:RICON.leaf,phase:"Apoyo bioquímico (opcional)",title:"Suplementos: solo como complemento",body:supTxt+" <i>No es consejo médico.</i>",why:supWhy});
+
+  /* 10 · metacognición (siempre, escalado) */
+  recs.push({icon:RICON.target,phase:"Etapa 3 · Dirección",title:"Cierra cada semana con autoevaluación",
+    body:"Dedica 10 min a la semana a <b>revisar qué funcionó, qué fallas se repiten y qué ajustar</b>. Lleva un registro simple de tu progreso y de tus errores recurrentes.",
+    why:"La metacognición (teoría 10) es lo que predice el rendimiento a largo plazo: convierte el estudio en un sistema que se corrige solo, en lugar de repetir lo que no funciona."});
+
+  /* 11 · condiciones sensibles (con cuidado) */
+  if(p.condicion && p.condicion.includes('atencion')){
+    recs.push({icon:RICON.shield,phase:"Ajuste personal",title:"Si te cuesta concentrarte largo rato, externaliza la estructura",
+      body:"Usa <b>bloques más cortos</b>, quita el móvil de la vista, fíjate una sola tarea por sesión y apóyate en temporizadores. La estructura externa compensa el esfuerzo de mantener el foco.",
+      why:"Reducir la carga y las distracciones libera memoria de trabajo. Si esto interfiere mucho en tu día a día, considera consultarlo con un profesional de la salud (esto no es un diagnóstico)."});
+  }
+  if(p.condicion && p.condicion.includes('ansiedad')){
+    recs.push({icon:RICON.shield,phase:"Ajuste personal",title:"Si te bloqueas al estudiar, baja la presión y usa el autoexamen sin nota",
+      body:"Empieza con tareas pequeñas y alcanzables para generar impulso, practica la recuperación <b>sin puntuarte</b> (solo para aprender) y haz pausas de respiración. La meta primero es reducir el bloqueo, no exigirte.",
+      why:"Un nivel de activación moderado ayuda, pero el exceso de ansiedad satura la memoria de trabajo y empeora el recuerdo. Si el malestar es importante, hablar con un profesional puede ayudarte."});
+  }
+
+  return recs;
+}
+
+/* ====================== RENDER RESULTADOS ====================== */
+let recState={};
+function renderPlan(){
+  const recs = buildRecs(profile);
+  recState={};
+  const html = recs.map((r,i)=>{
+    recState[i]='neutral';
+    return `<article class="rec" data-id="${i}" data-state="neutral">
+      <div class="rec__icon">${r.icon}</div>
+      <div class="rec__body">
+        <span class="rec__phase">${r.phase}</span>
+        <h4 class="rec__title">${r.title}</h4>
+        <p>${r.body}</p>
+        <div class="rec__why"><b>Por qué te lo sugiero</b>${r.why}</div>
+        <div class="rec__acts">
+          <button class="rec__btn rec__btn--in" data-act="in" data-id="${i}" aria-pressed="false">✓ Aceptar</button>
+          <button class="rec__btn rec__btn--out" data-act="out" data-id="${i}" aria-pressed="false">✕ Descartar</button>
+        </div>
+      </div>
+    </article>`;
+  }).join('');
+  document.getElementById('recList').innerHTML = html;
+  document.getElementById('plan').classList.add('show');
+  bindRecButtons();
+  updateCount();
+  document.getElementById('plan').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function bindRecButtons(){
+  document.querySelectorAll('.rec__btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const id=btn.dataset.id, act=btn.dataset.act;
+      const card=document.querySelector(`.rec[data-id="${id}"]`);
+      const inBtn=card.querySelector('.rec__btn--in');
+      const outBtn=card.querySelector('.rec__btn--out');
+      if(recState[id]===act){ recState[id]='neutral'; card.dataset.state='neutral'; inBtn.setAttribute('aria-pressed','false'); outBtn.setAttribute('aria-pressed','false'); }
+      else { recState[id]=act; card.dataset.state=act;
+        inBtn.setAttribute('aria-pressed', act==='in'?'true':'false');
+        outBtn.setAttribute('aria-pressed', act==='out'?'true':'false'); }
+      updateCount();
+    });
+  });
+}
+function updateCount(){
+  const n=Object.values(recState).filter(s=>s==='in').length;
+  document.getElementById('count').textContent=n;
+}
+/* ====================== ASISTENTE PASO A PASO ====================== */
+(function(){
+  const wizard=document.getElementById('wizard');
+  if(!wizard) return;
+  const steps=[...wizard.querySelectorAll('.step')];
+  const total=steps.length;
+  const elNow=document.getElementById('wizNow');
+  const elTotal=document.getElementById('wizTotal');
+  const elLabel=document.getElementById('wizLabel');
+  const elFill=document.getElementById('wizFill');
+  const elTrack=wizard.querySelector('.wiz__track');
+  const back=document.getElementById('wizBack');
+  const next=document.getElementById('wizNext');
+  const hint=document.getElementById('wizHint');
+  const stage=wizard.querySelector('.wiz__stage');
+  const labels=["Tu objetivo","Tu nivel","Tu disponibilidad","Tu cronotipo","Cómo recibes la información","Tu plazo","Tu entorno","Sueño y ejercicio","Cafeína","Edad","Motivación","A tener en cuenta"];
+  const reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let i=0;
+  elTotal.textContent=total;
+
+  function stepSatisfied(idx){
+    const req=steps[idx].dataset.req;
+    if(!req) return true;                 // pasos opcionales siempre permiten avanzar
+    return req.split(',').every(k=>{
+      const v=profile[k];
+      return Array.isArray(v)? v.length>0 : !!v;
+    });
+  }
+  function refreshNav(){
+    const ok=stepSatisfied(i);
+    next.disabled=!ok;
+    if(hint) hint.style.visibility=ok?'hidden':'visible';
+  }
+  function show(idx,dir,doScroll){
+    steps.forEach((s,k)=>s.classList.toggle('is-active',k===idx));
+    i=idx;
+    elNow.textContent=idx+1;
+    elLabel.textContent=labels[idx]||'';
+    elFill.style.width=(((idx+1)/total)*100)+'%';
+    if(elTrack) elTrack.setAttribute('aria-valuenow',idx+1);
+    back.disabled=idx===0;
+    const last=idx===total-1;
+    next.textContent=last?'Generar mi estrategia →':'Siguiente →';
+    next.classList.toggle('wiz__next--final',last);
+    refreshNav();
+    if(!reduce){
+      const fromY=dir==='back'?-10:10;
+      steps[idx].animate([{opacity:0,transform:'translateY('+fromY+'px)'},{opacity:1,transform:'none'}],{duration:240,easing:'ease'});
+    }
+    if(doScroll) wizard.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
+  }
+
+  // Al elegir cualquier opción o escribir en un campo del paso activo, recalculamos el botón.
+  stage.addEventListener('click',e=>{ if(e.target.closest('.opt')) refreshNav(); });
+  stage.addEventListener('input',refreshNav);
+  stage.addEventListener('keydown',e=>{
+    if(e.key==='Enter'&&e.target.tagName==='INPUT'){ e.preventDefault(); if(!next.disabled) next.click(); }
+  });
+
+  back.addEventListener('click',()=>{ if(i>0) show(i-1,'back',true); });
+  next.addEventListener('click',()=>{
+    if(next.disabled) return;
+    if(i<total-1){ show(i+1,'fwd',true); }
+    else {
+      if(!profile.objetivo||!profile.nivel){ show(0,'back',true); return; }
+      renderPlan();
+    }
+  });
+
+  show(0,'fwd',false);  // estado inicial sin desplazar la página
+})();
+document.getElementById('acceptAll').addEventListener('click',()=>{
+  document.querySelectorAll('.rec').forEach(card=>{
+    const id=card.dataset.id;
+    recState[id]='in'; card.dataset.state='in';
+    card.querySelector('.rec__btn--in').setAttribute('aria-pressed','true');
+    card.querySelector('.rec__btn--out').setAttribute('aria-pressed','false');
+  });
+  updateCount();
+});
+document.getElementById('printPlan').addEventListener('click',()=>window.print());
+
+/* ====================== CURSO 01 · ENTENDER LA IA CON CLAUDE ====================== */
+(function(){
+  const listEl   = document.getElementById('courseList');
+  const panel    = document.getElementById('lessonPanel');
+  if(!listEl || !panel) return;
+
+  /* --- almacenamiento (localStorage con respaldo en memoria) --- */
+  const Store = (function(){
+    let ok = true, mem = {};
+    try { const k='atlas.__t'; window.localStorage.setItem(k,'1'); window.localStorage.removeItem(k); }
+    catch(e){ ok = false; }
+    const KEY='atlas.v1';
+    return {
+      available: ok,
+      load(){ if(!ok) return mem; try{ return JSON.parse(window.localStorage.getItem(KEY)||'{}'); }catch(e){ return {}; } },
+      save(o){ mem=o; if(!ok) return; try{ window.localStorage.setItem(KEY, JSON.stringify(o)); }catch(e){} }
+    };
+  })();
+
+  let data = Store.load();
+  if(!data.c1) data.c1 = { done:{}, streak:0, last:null };
+  if(!data.c1.done) data.c1.done = {};
+  function persist(){ Store.save(data); }
+
+  /* --- fechas --- */
+  function ymd(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+  function addDays(d,n){ const x=new Date(d); x.setDate(x.getDate()+n); return x; }
+  function touchStreak(){
+    const c=data.c1, today=ymd(new Date());
+    if(c.last===today) return;
+    const yest=ymd(addDays(new Date(),-1));
+    c.streak = (c.last===yest) ? (c.streak||0)+1 : 1;
+    c.last = today;
+    persist(); updateDash();
+  }
+
+  /* --- datos del curso (fiel al plan de 10 días) --- */
+  const GLOSS = [
+    ["Token","la unidad mínima de texto que procesa el modelo (una palabra, parte de una palabra o un signo). El modelo no lee letras, lee tokens."],
+    ["Embedding","la representación numérica (un vector) de un token o un texto. Es cómo el modelo convierte lenguaje en números con los que operar."],
+    ["Parámetros","los ajustes internos que se afinaron durante el entrenamiento. Más parámetros ≈ más capacidad. Se cuentan en miles de millones."],
+    ["Transformer","la arquitectura de red neuronal base de los LLM."],
+    ["Atención (self-attention)","el mecanismo que mide qué tan relacionada está cada palabra con todas las demás, sin importar la distancia. Es lo que da contexto."],
+    ["Pre-training","la fase donde el modelo aprende patrones del lenguaje prediciendo texto sobre enormes corpus."],
+    ["Fine-tuning","entrenamiento adicional para especializar o mejorar el comportamiento del modelo."],
+    ["RLHF","aprendizaje por refuerzo con retroalimentación humana: personas evalúan respuestas y el modelo aprende a comportarse mejor (más útil y seguro)."],
+    ["Prompt","la instrucción o mensaje que le das al modelo."],
+    ["Contexto / ventana de contexto","todo el texto que el modelo puede tener presente a la vez (tu mensaje, el historial, archivos). Tiene un límite."],
+    ["Inferencia","el acto de generar una respuesta (a diferencia del entrenamiento)."],
+    ["Temperatura","ajuste que controla qué tan creativa o aleatoria es la respuesta (baja = predecible, alta = variada)."],
+    ["Alucinación","cuando el modelo genera algo que suena correcto pero es falso o inventado."],
+    ["Multimodal","un modelo que entiende más de un tipo de dato (texto + imágenes, por ejemplo)."],
+    ["Agente","una IA que no solo responde, sino que ejecuta pasos y usa herramientas para cumplir una tarea."],
+    ["MCP (Model Context Protocol)","estándar para conectar una IA con herramientas y datos externos."],
+    ["A2A (Agent-to-Agent)","estándar para que varias IAs/agentes se comuniquen y se deleguen tareas entre sí."],
+    ["RAG","generación aumentada por recuperación: el modelo busca en una fuente externa y usa esos datos para responder con información real."]
+  ];
+
+  /* --- términos para definición rápida (hover / toque) --- */
+  const TERMS = [
+    {k:"LLM", m:["modelos grandes de lenguaje","modelo grande de lenguaje","LLM"], d:"Modelo grande de lenguaje: una IA que aprendió patrones del texto y predice el siguiente fragmento más probable."},
+    {k:"Token", m:["tokens","token"], d:"La unidad mínima de texto que procesa el modelo: una palabra, parte de una palabra o un signo."},
+    {k:"Embedding", m:["embeddings","embedding"], d:"La representación numérica (un vector) de un texto, para que el modelo pueda operar con él."},
+    {k:"Transformer", m:["Transformer","transformador"], d:"La arquitectura de red neuronal base de los LLM; su idea central es la atención."},
+    {k:"Atención", m:["self-attention","atención"], d:"Mecanismo que mide cómo se relaciona cada palabra con todas las demás; es lo que da contexto."},
+    {k:"Parámetros", m:["parámetros"], d:"Los ajustes internos del modelo, afinados durante el entrenamiento. Se cuentan en miles de millones."},
+    {k:"Pre-training", m:["entrenamiento previo","pre-training"], d:"Fase donde el modelo aprende patrones del lenguaje prediciendo texto sobre enormes corpus."},
+    {k:"Fine-tuning", m:["ajuste fino","fine-tuning"], d:"Entrenamiento adicional para especializar o mejorar el comportamiento del modelo."},
+    {k:"RLHF", m:["RLHF"], d:"Aprendizaje por refuerzo con retroalimentación humana: personas evalúan respuestas y el modelo aprende a comportarse mejor."},
+    {k:"Prompt", m:["prompts","prompt"], d:"La instrucción o mensaje que le das al modelo."},
+    {k:"Contexto", m:["ventana de contexto","contexto"], d:"Todo el texto que el modelo puede tener presente a la vez (tu mensaje, el historial, archivos). Tiene un límite."},
+    {k:"Inferencia", m:["inferencia"], d:"El acto de generar una respuesta (a diferencia del entrenamiento)."},
+    {k:"Temperatura", m:["temperatura"], d:"Ajuste de cuán creativa o aleatoria es la respuesta (baja = predecible, alta = variada)."},
+    {k:"Alucinación", m:["alucinaciones","alucinación","alucina"], d:"Cuando el modelo genera algo que suena correcto pero es falso o inventado."},
+    {k:"Multimodal", m:["multimodal"], d:"Un modelo que entiende más de un tipo de dato (texto + imágenes, por ejemplo)."},
+    {k:"Agente", m:["agentes","agente"], d:"Una IA que no solo responde: ejecuta pasos y usa herramientas para cumplir una tarea."},
+    {k:"MCP", m:["MCP"], d:"Model Context Protocol: estándar para conectar una IA con herramientas y datos externos (el USB-C de la IA)."},
+    {k:"A2A", m:["A2A"], d:"Agent-to-Agent: estándar para que varias IAs o agentes se comuniquen y se deleguen tareas entre sí."},
+    {k:"RAG", m:["RAG"], d:"Generación aumentada por recuperación: el modelo busca en una fuente externa y usa esos datos para responder."},
+    {k:"Muestreo", m:["muestreo","sampling"], d:"Elegir el siguiente token entre las opciones probables (la temperatura influye aquí)."}
+  ];
+
+  /* --- tooltip único --- */
+  const tip = (function(){ const e=document.createElement('div'); e.className='gloss-tip'; e.setAttribute('role','tooltip'); document.body.appendChild(e); return e; })();
+  let tipFor=null;
+  function showTip(span){
+    tip.innerHTML = '<b></b><span></span>';
+    tip.firstChild.textContent = span.dataset.k || '';
+    tip.lastChild.textContent  = span.dataset.d || '';
+    tip.classList.add('show'); tipFor=span; positionTip(span);
+  }
+  function positionTip(span){
+    const r=span.getBoundingClientRect(), tw=tip.offsetWidth, th=tip.offsetHeight;
+    let x=r.left + r.width/2 - tw/2, y=r.top - th - 9;
+    if(y<8) y=r.bottom+9;
+    x=Math.max(8, Math.min(x, window.innerWidth - tw - 8));
+    tip.style.left=x+'px'; tip.style.top=y+'px';
+  }
+  function hideTip(){ tip.classList.remove('show'); tipFor=null; }
+  function initTooltip(){
+    document.addEventListener('mouseover', e=>{ const t=e.target.closest && e.target.closest('.gloss-term'); if(t) showTip(t); });
+    document.addEventListener('mouseout',  e=>{ const t=e.target.closest && e.target.closest('.gloss-term'); if(t) hideTip(); });
+    document.addEventListener('click', e=>{
+      const t=e.target.closest && e.target.closest('.gloss-term');
+      if(t){ e.preventDefault(); if(tipFor===t) hideTip(); else showTip(t); }
+      else if(tipFor) hideTip();
+    });
+    document.addEventListener('focusin',  e=>{ const t=e.target.closest && e.target.closest('.gloss-term'); if(t) showTip(t); });
+    document.addEventListener('focusout', ()=> hideTip());
+    window.addEventListener('scroll', ()=>{ if(tipFor) positionTip(tipFor); }, true);
+    window.addEventListener('resize', hideTip);
+  }
+
+  /* --- envolver términos dentro de la lección --- */
+  function escapeRe(s){ return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'); }
+  function skippable(el){
+    while(el && el!==document.body){
+      if(el.classList && (el.classList.contains('gloss-term')||el.classList.contains('lres')||el.classList.contains('uplink')||el.classList.contains('lpanel__foot')||el.classList.contains('lblock__k')||el.classList.contains('lpanel__bar'))) return true;
+      const tag=el.tagName;
+      if(tag==='A'||tag==='BUTTON'||tag==='H3'||tag==='H4') return true;
+      el=el.parentNode;
+    }
+    return false;
+  }
+  function findTextNode(root, re){
+    const w=document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode:function(n){
+        if(!n.nodeValue || !re.test(n.nodeValue)) return NodeFilter.FILTER_REJECT;
+        if(skippable(n.parentNode)) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    return w.nextNode();
+  }
+  function wrapOneTerm(root, term){
+    for(let i=0;i<term.m.length;i++){
+      const re=new RegExp('(?<![\\p{L}\\p{N}])('+escapeRe(term.m[i])+')(?![\\p{L}\\p{N}])','iu');
+      const node=findTextNode(root, re);
+      if(node){
+        const mm=node.nodeValue.match(re), idx=mm.index, hit=mm[1];
+        const before=node.nodeValue.slice(0,idx), after=node.nodeValue.slice(idx+hit.length);
+        const span=document.createElement('span');
+        span.className='gloss-term'; span.setAttribute('tabindex','0');
+        span.dataset.k=term.k; span.dataset.d=term.d; span.textContent=hit;
+        const frag=document.createDocumentFragment();
+        if(before) frag.appendChild(document.createTextNode(before));
+        frag.appendChild(span);
+        if(after) frag.appendChild(document.createTextNode(after));
+        node.parentNode.replaceChild(frag, node);
+        return true;
+      }
+    }
+    return false;
+  }
+  function wrapLessonTerms(){
+    try{
+      const root=panel.querySelector('.lpanel__body'); if(!root) return;
+      TERMS.forEach(t=>wrapOneTerm(root,t));
+    }catch(e){ /* navegador sin soporte de regex unicode: se omite el subrayado */ }
+  }
+
+  /* --- render del glosario completo (con buscador) --- */
+  function renderGlossary(){
+    const grid=document.getElementById('glossGrid'), search=document.getElementById('glossSearch');
+    if(!grid) return;
+    function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+    function draw(q){
+      q=(q||'').trim().toLowerCase();
+      const items=GLOSS.filter(g=> !q || g[0].toLowerCase().indexOf(q)>=0 || g[1].toLowerCase().indexOf(q)>=0);
+      grid.innerHTML = items.length
+        ? items.map(g=>'<div class="gcard"><h4>'+esc(g[0])+'</h4><p>'+esc(g[1])+'</p></div>').join('')
+        : '<div class="gcard gcard--empty">No hay términos que coincidan con tu búsqueda.</div>';
+    }
+    draw('');
+    if(search) search.addEventListener('input', ()=>draw(search.value));
+  }
+
+  const COURSE = [
+    { n:1, t:"¿Qué es la IA generativa?", dur:"Sesión de ~1.5–2 h · fundamentos e historia",
+      obj:"Entender qué es un LLM y de dónde viene, sin tecnicismos pesados.",
+      learn:`<p>La IA que usas en un chat (Claude, ChatGPT, Gemini) pertenece a la familia de los <b>modelos grandes de lenguaje (LLM)</b>: sistemas que aprendieron patrones del lenguaje a partir de cantidades enormes de texto y que, en el fondo, hacen una sola cosa repetidamente: <b>predecir el siguiente fragmento de texto más probable</b>.</p>
+<p>Hitos que conviene conocer:</p>
+<ul><li><b>2017 — "Attention is All You Need":</b> Google publica la arquitectura <b>Transformer</b>, base de casi todos los LLM modernos; su idea central es el mecanismo de <b>atención</b>.</li>
+<li><b>2018 — GPT y BERT:</b> primeros grandes modelos basados en Transformer.</li>
+<li><b>2019–2023:</b> crecimiento explosivo de tamaño y capacidades; aparecen los asistentes conversacionales.</li>
+<li><b>2024–2025:</b> estandarización de las conexiones (MCP para herramientas, A2A entre agentes).</li></ul>
+<p>La idea clave: <b>un LLM no es una base de datos ni un buscador.</b> No consulta hechos en tiempo real por sí mismo; genera texto plausible según lo aprendido. Por eso a veces inventa (alucina) y por eso se le conectan herramientas cuando necesita datos reales y actuales.</p>`,
+      res:[ {t:"AI Fluency: Framework & Foundations (módulo \"What is Generative AI?\") — gratis en Coursera", u:"https://www.coursera.org/learn/ai-fluency-framework-foundations", e:"~3 h"},
+            {t:"Wikipedia (ES): \"Modelo grande de lenguaje\"", u:"https://es.wikipedia.org/wiki/Modelo_grande_de_lenguaje", e:"complemento"} ],
+      ex:"Explícale a alguien (o escríbelo) en 5 frases qué es un LLM y por qué \"no es un buscador\".",
+      win:"Puedes responder con tus palabras: \"¿la IA piensa o predice?\"" },
+
+    { n:2, t:"Cómo funciona por dentro", dur:"Sesión de ~1.5–2 h · qué pasa detrás de pantalla",
+      obj:"Entender el proceso técnico que convierte tu mensaje en una respuesta.",
+      learn:`<p>Cuando escribes un mensaje, esto ocurre paso a paso:</p>
+<ol><li><b>Tokenización:</b> tu texto se parte en <b>tokens</b>.</li>
+<li><b>Embeddings:</b> cada token se convierte en un vector de números.</li>
+<li><b>Capas de atención:</b> el modelo calcula cómo se relaciona cada token con los demás para construir el significado en contexto.</li>
+<li><b>Distribución de probabilidad:</b> produce una lista de probabilidades para el siguiente token.</li>
+<li><b>Muestreo (sampling):</b> elige uno de esos tokens (la <b>temperatura</b> influye aquí).</li>
+<li><b>Repetición:</b> ese token se añade y todo se repite, token a token, hasta completar la respuesta.</li></ol>
+<p>Consecuencias prácticas: el modelo <b>genera palabra por palabra</b> (no tiene la respuesta guardada de antemano), <b>no verifica hechos</b> por sí solo (puede sonar seguro y estar equivocado), <b>tu forma de describir la tarea cambia mucho el resultado</b>, y <b>no recuerda</b> entre conversaciones salvo que exista un sistema de memoria.</p>`,
+      res:[ {t:"Este plan, sección A.3 (proceso interno)", u:"", e:"referencia"},
+            {t:"Wikipedia (ES): \"Transformador (aprendizaje automático)\"", u:"https://es.wikipedia.org/wiki/Transformador_(modelo_de_aprendizaje_autom%C3%A1tico)", e:"complemento"} ],
+      ex:"Toma una frase y descríbela como la \"vería\" el modelo (en tokens, en contexto). ¿Qué respuesta sería \"segura\" y cuál \"creativa\"? (Pídele a Claude un diagrama de la atención si quieres verlo.)",
+      win:"Puedes explicar por qué el modelo a veces inventa (alucina)." },
+
+    { n:3, t:"Capacidades y límites reales", dur:"Sesión de ~1.5–2 h · usarla bien, sin confiar de más",
+      obj:"Saber qué SÍ y qué NO puede hacer la IA, para usarla bien y no confiar de más.",
+      learn:`<p><b>Fortalezas:</b> redactar, resumir, traducir, programar, razonar paso a paso, reorganizar información, generar ideas y borradores.</p>
+<p><b>Límites que debes tener presentes:</b></p>
+<ul><li><b>Alucinaciones:</b> puede afirmar con seguridad cosas falsas.</li>
+<li><b>Fecha de corte:</b> su conocimiento base está congelado; sin herramientas, no conoce lo más reciente.</li>
+<li><b>Sin verificación automática:</b> no comprueba hechos por su cuenta.</li>
+<li><b>Sesgos:</b> reproduce patrones (incluidos sesgos) presentes en sus datos.</li></ul>
+<p>Regla práctica: cuanto más importante o verificable sea un dato, más debes contrastarlo tú o pedir que use búsqueda y cite fuentes.</p>`,
+      res:[ {t:"AI Capabilities and Limitations — Anthropic Academy (curso neutral)", u:"https://anthropic.skilljar.com/", e:"curso"},
+            {t:"Anthropic Academy (índice de cursos)", u:"https://www.anthropic.com/learn", e:"portal"} ],
+      ex:"Haz a Claude una pregunta sobre un hecho muy reciente y observa si necesita buscar en la web. Luego pídele que cite fuentes.",
+      win:"Sabes cuándo NO debes fiarte de una respuesta sin verificarla." },
+
+    { n:4, t:"El lenguaje del campo (glosario)", dur:"Sesión de ~1.5–2 h · vocabulario consolidado",
+      obj:"Manejar el vocabulario para entender cualquier texto o video sobre IA.",
+      learn:`<p>Domina estos términos y entenderás el 80% de las conversaciones sobre IA. Repasa hasta que cada uno te resulte natural.</p>`,
+      gloss: GLOSS,
+      res:[ {t:"Este plan, sección A.2 (glosario completo)", u:"", e:"referencia"},
+            {t:"Documentación de Claude (consulta términos nuevos)", u:"https://docs.claude.com", e:"docs"} ],
+      ex:"Crea tus propias tarjetas (token, embedding, RLHF, contexto, agente, MCP…) y autoexamínate sin mirar.",
+      win:"Puedes definir 12 de los 18 términos sin mirar." },
+
+    { n:5, t:"Comunicarte con la IA: Delegación y Descripción", dur:"Sesión de ~1.5–2 h · marco 4D (1.ª parte)",
+      obj:"Aprender a dar instrucciones que produzcan buenos resultados.",
+      learn:`<p>El <b>marco 4D</b> de fluidez con IA (creado por Rick Dakan y Joseph Feller con Anthropic). Hoy ves las dos primeras D:</p>
+<ul><li><b>Delegación:</b> decidir qué tareas conviene darle a la IA y cuáles no.</li>
+<li><b>Descripción:</b> comunicar el objetivo con claridad — <b>rol, contexto, restricciones, ejemplos y formato deseado</b>.</li></ul>
+<p>Y los <b>tres modos de trabajo</b>:</p>
+<ul><li><b>Automatización:</b> la IA ejecuta una tarea bien definida.</li>
+<li><b>Aumentación:</b> tú y la IA colaboran de ida y vuelta.</li>
+<li><b>Agencia:</b> la IA actúa de forma más autónoma usando herramientas.</li></ul>`,
+      res:[ {t:"AI Fluency — módulos de Delegación y Descripción", u:"https://www.coursera.org/learn/ai-fluency-framework-foundations", e:"curso"},
+            {t:"Guía de prompting de Claude", u:"https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview", e:"guía"} ],
+      ex:"Toma una tarea real tuya y escríbela como prompt aplicando: rol + contexto + restricciones + ejemplo + formato. Compárala contra una versión \"mínima\".",
+      win:"Tu prompt detallado produce visiblemente mejor resultado que el prompt corto." },
+
+    { n:6, t:"Evaluar y usar con responsabilidad: Discernimiento y Diligencia", dur:"Sesión de ~1.5–2 h · marco 4D (2.ª parte)",
+      obj:"Saber juzgar críticamente lo que la IA produce y usarla de forma ética y segura.",
+      learn:`<p>Las otras dos D del marco:</p>
+<ul><li><b>Discernimiento:</b> evaluar con criterio si la respuesta es buena, detectar errores y vacíos.</li>
+<li><b>Diligencia:</b> responsabilidad sobre el producto final; uso ético y seguro.</li></ul>
+<p>Y el <b>bucle Descripción–Discernimiento:</b> describes → evalúas → reformulas → mejoras. <b>Iterar</b> es la habilidad central: rara vez el primer intento es el mejor.</p>`,
+      res:[ {t:"AI Fluency — módulos de Discernimiento y Diligencia", u:"https://www.coursera.org/learn/ai-fluency-framework-foundations", e:"curso"} ],
+      ex:"Pídele a Claude un texto con datos; verifica al menos dos afirmaciones por tu cuenta y corrígelas con una segunda instrucción.",
+      win:"Completaste un ciclo de mejora (primer borrador → versión corregida) detectando tú los problemas." },
+
+    { n:7, t:"Conexiones: herramientas (MCP) y otras IAs (A2A)", dur:"Sesión de ~1.5–2 h · cómo accede a más",
+      obj:"Entender cómo la IA accede a información adicional y se conecta con otras IAs.",
+      learn:`<p>Por sí solo, un LLM solo tiene su conocimiento congelado. Para que sea útil con datos reales y actúe en el mundo, se le conecta a herramientas. Dos estándares clave:</p>
+<ul><li><b>MCP (Model Context Protocol)</b> — creado por Anthropic (finales de 2024). Conexión <b>vertical: una IA con sus herramientas</b>. Es darle "manos" a la IA. Tres piezas: <b>Tools</b> (acciones), <b>Resources</b> (datos de solo lectura) y <b>Prompts</b> (plantillas). Analogía: <i>el "USB-C" de la IA</i>.</li>
+<li><b>A2A (Agent-to-Agent)</b> — creado por Google (abril de 2025). Conexión <b>horizontal: una IA con otras IAs</b>. Un agente coordinador delega subtareas a agentes especializados. Analogía: <i>el "HTTP" para que los agentes se comuniquen</i>.</li></ul>
+<p>En resumen: <b>MCP conecta la IA con herramientas; A2A conecta unas IAs con otras.</b> El <b>RAG</b> es la técnica de buscar en una fuente externa y usar esos datos para responder. En Claude, las "conexiones" que activas (Gmail, Drive, etc.) funcionan sobre la idea de MCP.</p>`,
+      res:[ {t:"Este plan, sección A.4 (conexiones)", u:"", e:"referencia"},
+            {t:"Introduction to MCP — Anthropic Academy (si programas)", u:"https://anthropic.skilljar.com/", e:"curso"} ],
+      ex:"En Claude, revisa qué conectores/herramientas hay (búsqueda web, archivos). Activa la búsqueda web y pídele algo que requiera datos actuales; observa cómo cambia su respuesta.",
+      win:"Puedes explicar con una analogía la diferencia entre MCP y A2A." },
+
+    { n:8, t:"Claude a fondo: funciones y configuración", dur:"Sesión de ~1.5–2 h · dominar la plataforma",
+      obj:"Dominar la plataforma de Claude específicamente.",
+      learn:`<p><b>Modelos:</b> Claude tiene una familia con distintos tamaños/velocidades (uno rápido y ligero, uno equilibrado y uno más potente para tareas complejas). Puedes cambiar de modelo según la tarea.</p>
+<p><b>Funciones dentro del chat:</b> Artifacts (crear documentos, código y visualizaciones), búsqueda web, ejecución de código y creación de archivos, Proyectos (espacios con memoria propia), memoria a partir del historial, estilos de redacción y preferencias de usuario.</p>
+<p><b>Ecosistema:</b> Claude Code (programación por terminal), Claude Cowork (trabajo de conocimiento sobre tus archivos), Claude en Chrome/Excel/PowerPoint, y la API para desarrolladores.</p>
+<p><b>Configuraciones útiles:</b> activar/desactivar herramientas, conectores, preferencias y estilo. <i>Los nombres y versiones exactas cambian con frecuencia: verifica siempre los detalles actuales en la documentación.</i></p>`,
+      res:[ {t:"Claude 101 — Anthropic Academy", u:"https://anthropic.skilljar.com/", e:"curso"},
+            {t:"Documentación de Claude", u:"https://docs.claude.com", e:"docs"},
+            {t:"Soporte de Claude", u:"https://support.claude.com", e:"soporte"} ],
+      ex:"Crea un Proyecto en Claude, ajusta tus preferencias y genera tu primer Artifact (un documento o una pequeña visualización).",
+      win:"Sabes elegir qué modelo/función usar para tres tareas distintas." },
+
+    { n:9, t:"Práctica integrada: un proyecto real", dur:"Sesión de ~1.5–2 h · unir todo de principio a fin",
+      obj:"Unir todo lo aprendido en una tarea de principio a fin.",
+      learn:`<p>El flujo completo, en orden: <b>delegar → describir bien → usar herramientas → discernir/iterar → entregar</b>.</p>
+<p>Elige algo con valor real para ti (un resumen, un análisis, un plan, un texto importante). La meta no es practicar en abstracto, sino salir con algo que de verdad uses.</p>`,
+      res:[ {t:"Tu propia tarea real (lo que necesites resolver esta semana)", u:"", e:"práctica"} ],
+      ex:"Completa esa tarea con Claude usando: un buen prompt (rol+contexto+restricciones+ejemplo+formato), al menos una herramienta (búsqueda o archivos) y dos ciclos de mejora.",
+      win:"Tienes un producto terminado que usarías de verdad." },
+
+    { n:10, t:"Consolidación, comparación y siguientes pasos", dur:"Sesión de ~1.5–2 h · cerrar el panorama",
+      obj:"Cerrar el panorama y dejar tu propio método de uso.",
+      learn:`<p><b>Comparación entre IAs:</b> Claude, ChatGPT (OpenAI) y Gemini (Google) comparten el mismo tronco (LLM + Transformer); se diferencian en modelos, herramientas, estilo y enfoque. El <b>marco 4D te sirve con cualquiera</b>.</p>
+<p><b>Tu "política personal de uso de IA":</b> define en qué tareas confías, qué siempre verificas y qué nunca delegas.</p>
+<p><b>Autoevaluación final.</b> Al terminar deberías poder, sin ayuda: (1) explicar qué es un LLM y por qué predice en vez de pensar o buscar; (2) describir el proceso interno (token → atención → predicción → repetición); (3) definir 12 términos del glosario; (4) aplicar el marco 4D a una tarea real; (5) explicar MCP vs A2A; (6) elegir el modelo/función de Claude y configurar tu entorno; (7) completar una tarea real con dos ciclos de mejora. <b>Con 6 de 7, lograste el objetivo.</b></p>`,
+      res:[ {t:"AI Fluency — módulo de conclusión (arma tu política personal)", u:"https://www.coursera.org/learn/ai-fluency-framework-foundations", e:"curso"},
+            {t:"Anthropic Academy", u:"https://www.anthropic.com/learn", e:"portal"} ],
+      ex:"Escribe en una página tu política personal de uso de IA + una lista de tus 5 usos más valiosos.",
+      win:"Puedes explicarle a otra persona, en 10 minutos, qué es la IA, cómo funciona y cómo usarla bien." }
+  ];
+
+  /* --- helpers de estado --- */
+  function isDone(n){ return !!data.c1.done[n]; }
+  function doneCount(){ return COURSE.filter(L=>isDone(L.n)).length; }
+  function nextDay(){ const L = COURSE.find(L=>!isDone(L.n)); return L ? L.n : null; }
+
+  /* --- iconos --- */
+  const LINK_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>';
+  const DOC_SVG  = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>';
+
+  /* --- render de la lista --- */
+  function renderList(){
+    const nxt = nextDay();
+    listEl.innerHTML = COURSE.map(L=>{
+      const done = isDone(L.n);
+      const isNext = (L.n===nxt);
+      const st = done ? '✓ Completado' : (isNext ? 'Siguiente' : 'Pendiente');
+      const badge = isNext ? '<span class="lesson__badge">Siguiente</span>' : '';
+      return `<button class="lesson" data-day="${L.n}" data-done="${done?1:0}" data-next="${isNext?1:0}">
+        <span class="lesson__num">${String(L.n).padStart(2,'0')}</span>
+        <span class="lesson__main">
+          <span class="lesson__t">Día ${L.n} — ${L.t}${badge}</span>
+          <span class="lesson__o">${L.obj}</span>
+        </span>
+        <span class="lesson__st">${st}<span class="lesson__dot"></span></span>
+      </button>`;
+    }).join('');
+    listEl.querySelectorAll('.lesson').forEach(b=>{
+      b.addEventListener('click',()=>openLesson(parseInt(b.dataset.day,10)));
+    });
+  }
+
+  /* --- tablero --- */
+  function updateDash(){
+    const dc = doneCount(), pct = Math.round(dc/COURSE.length*100), nxt = nextDay();
+    setText('dashStreak', data.c1.streak||0);
+    setText('dashDone', dc);
+    setText('dashPct', pct);
+    const fill = document.getElementById('cprogFill'); if(fill) fill.style.width = pct+'%';
+    setText('cprogCap', dc+' de '+COURSE.length+' sesiones');
+    const go = document.getElementById('dashGo');
+    if(nxt===null){
+      setText('dashNextK','Curso completado');
+      setText('dashNextT','Has terminado las 10 sesiones. Puedes repasar cualquier día.');
+      if(go) go.textContent = 'Repasar el curso →';
+      showBanner('¡Felicidades! Completaste el Curso 01. Tu siguiente paso ideal: escribe tu política personal de uso de IA (Día 10) y empieza un proyecto real.');
+    } else {
+      const L = COURSE.find(x=>x.n===nxt);
+      setText('dashNextK', dc===0 ? 'Empieza por aquí' : 'Continúa por aquí');
+      setText('dashNextT','Día '+L.n+' — '+L.t);
+      if(go) go.textContent = dc===0 ? 'Empezar la sesión de hoy →' : 'Continuar la sesión →';
+      hideBanner();
+    }
+  }
+  function setText(id,v){ const el=document.getElementById(id); if(el) el.textContent=v; }
+  function showBanner(txt){ const b=document.getElementById('courseBanner'); if(b){ setText('courseBannerTxt',txt); b.classList.add('show'); } }
+  function hideBanner(){ const b=document.getElementById('courseBanner'); if(b) b.classList.remove('show'); }
+
+  /* --- temporizador visual sin números ("uploading to brain") --- */
+  let tIv=null, tRun=false, tElapsed=0, tStart=0, tDur=45*60;
+  let tBox,tFill,tStatus,tGo,tHint,doneBtnRef,footMsgRef,curDay;
+  const PHASES = ["Estableciendo enlace…","Cargando al córtex…","Indexando conceptos…","Tejiendo conexiones…","Consolidando sinapsis…","Casi sincronizado…"];
+  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function tSetFrac(f){
+    f = Math.max(0, Math.min(1, f));
+    const top = 164 - 120*f;           // círculo: top=44, base=164
+    if(tFill){ tFill.setAttribute('y', top.toFixed(1)); tFill.setAttribute('height', (164-top).toFixed(1)); }
+  }
+  function tSetStatus(txt){
+    if(!tStatus || tStatus.textContent===txt) return;
+    tStatus.style.opacity = 0;
+    setTimeout(()=>{ tStatus.textContent = txt; tStatus.style.opacity = 1; }, 160);
+  }
+  function tTick(){
+    if(!tRun) return;
+    tElapsed = (Date.now()-tStart)/1000;
+    const f = Math.min(1, tElapsed/tDur);
+    tSetFrac(f);
+    tSetStatus(PHASES[Math.min(PHASES.length-1, Math.floor(f*PHASES.length))]);
+    if(f>=1) tComplete();
+  }
+  function tStartFn(){
+    if(tRun) return;
+    tRun = true; tStart = Date.now() - tElapsed*1000;
+    if(tBox){ tBox.classList.add('run'); tBox.classList.remove('done'); }
+    if(tGo) tGo.textContent = 'Pausar';
+    if(tHint) tHint.textContent = 'En curso. Respira y concéntrate; el reloj no importa.';
+    tIv = setInterval(tTick, 250); tTick();
+    touchStreak();
+  }
+  function tPause(){
+    tRun = false; clearInterval(tIv);
+    if(tBox) tBox.classList.remove('run');
+    if(tGo) tGo.textContent = 'Reanudar';
+    tSetStatus('En pausa');
+  }
+  function tReset(){
+    tRun = false; clearInterval(tIv); tElapsed = 0;
+    if(tBox) tBox.classList.remove('run','done');
+    if(tGo) tGo.textContent = 'Empezar';
+    if(tHint) tHint.textContent = 'Elige la profundidad y pulsa empezar.';
+    tSetFrac(0); tSetStatus('Listo para empezar');
+  }
+  function tComplete(){
+    tRun = false; clearInterval(tIv); tElapsed = tDur;
+    tSetFrac(1);
+    if(tBox){ tBox.classList.remove('run'); tBox.classList.add('done'); }
+    if(tGo) tGo.textContent = 'Empezar de nuevo';
+    tSetStatus('Transferencia completa ✓');
+    if(tHint) tHint.textContent = 'Sesión de enfoque completada.';
+    chime();
+    if(footMsgRef) footMsgRef.innerHTML = 'Sesión de enfoque completada. <b>Marca tu señal de logro</b> para cerrar el día.';
+    if(doneBtnRef && !isDone(curDay)) doneBtnRef.scrollIntoView({behavior: reduce?'auto':'smooth', block:'center'});
+  }
+  function chime(){
+    try{
+      const Ac = window.AudioContext || window.webkitAudioContext; if(!Ac) return;
+      const ac = new Ac(); const o = ac.createOscillator(); const g = ac.createGain();
+      o.connect(g); g.connect(ac.destination); o.type='sine';
+      o.frequency.setValueAtTime(660, ac.currentTime);
+      o.frequency.linearRampToValueAtTime(880, ac.currentTime+0.22);
+      g.gain.setValueAtTime(0.0001, ac.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.11, ac.currentTime+0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime+0.9);
+      o.start(); o.stop(ac.currentTime+0.95);
+      setTimeout(()=>{ try{ ac.close(); }catch(e){} }, 1200);
+    }catch(e){}
+  }
+
+  /* --- plantilla de la lección --- */
+  function timerHTML(){
+    return `<div class="uplink" id="uplink">
+      <div class="uplink__title">Uploading to brain</div>
+      <div class="uplink__sub">Sesión de enfoque para este capítulo. El temporizador no muestra números a propósito: no mires el reloj, sostén la atención y deja que el tema se "cargue".</div>
+      <div class="uplink__viz">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="uplg" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#C97E1E"/><stop offset="1" stop-color="#E9A23B"/></linearGradient>
+            <clipPath id="uplclip"><circle cx="100" cy="104" r="60"/></clipPath>
+          </defs>
+          <circle cx="100" cy="104" r="72" fill="none" stroke="rgba(243,236,221,.14)" stroke-width="1.5"/>
+          <circle cx="100" cy="104" r="72" fill="none" stroke="#E9A23B" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 12" opacity=".45"/>
+          <g clip-path="url(#uplclip)">
+            <rect id="uplFill" x="36" y="164" width="128" height="0" fill="url(#uplg)" opacity=".9"/>
+            <circle class="upl-particle" cx="88" cy="150" r="2.6" fill="#E9A23B"/>
+            <circle class="upl-particle" cx="100" cy="150" r="2" fill="#F3ECDD"/>
+            <circle class="upl-particle" cx="113" cy="150" r="2.6" fill="#E9A23B"/>
+          </g>
+          <circle cx="100" cy="104" r="60" fill="none" stroke="rgba(243,236,221,.5)" stroke-width="2"/>
+          <path d="M74 96 q12 -11 26 0 t26 0" fill="none" stroke="#F3ECDD" stroke-width="1.4" opacity=".34"/>
+          <path d="M70 112 q14 11 30 0 t30 0" fill="none" stroke="#F3ECDD" stroke-width="1.4" opacity=".3"/>
+          <path d="M82 80 q9 -7 18 0 t18 0" fill="none" stroke="#F3ECDD" stroke-width="1.4" opacity=".26"/>
+          <path d="M100 44 V62 M93 56 L100 62 L107 56" stroke="#E9A23B" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".75"/>
+        </svg>
+      </div>
+      <div class="uplink__status" id="uplStatus">Listo para empezar</div>
+      <div class="uplink__hint" id="uplHint">Elige la profundidad y pulsa empezar.</div>
+      <div class="uplink__opts" id="uplOpts">
+        <button class="uchip" data-min="25" aria-pressed="false">Enfoque<small>25 min</small></button>
+        <button class="uchip" data-min="45" aria-pressed="true">Profundo<small>45 min</small></button>
+        <button class="uchip" data-min="90" aria-pressed="false">Inmersión<small>90 min</small></button>
+      </div>
+      <div class="uplink__ctrls">
+        <button class="uctl uctl--go" id="uplGo">Empezar</button>
+        <button class="uctl" id="uplReset">Reiniciar</button>
+      </div>
+    </div>`;
+  }
+
+  function resourcesHTML(L){
+    return L.res.map(r=>{
+      const icon = r.u ? LINK_SVG : DOC_SVG;
+      const tag = r.e ? `<em>${r.e}</em>` : '';
+      if(r.u) return `<a class="lres" href="${r.u}" target="_blank" rel="noopener">${icon}<span>${r.t}</span>${tag}</a>`;
+      return `<div class="lres">${icon}<span>${r.t}</span>${tag}</div>`;
+    }).join('');
+  }
+
+  /* --- pedagogía por capítulo: técnicas, comprobación, diagramas, video --- */
+  const TECNICAS = {
+    1:["Doble codificación (diagrama)","Práctica de recuperación","Constructivismo"],
+    2:["Doble codificación (diagrama)","Carga cognitiva (paso a paso)","Práctica de recuperación"],
+    3:["Metacognición","Práctica de recuperación","Criterio (diligencia)"],
+    4:["Repetición espaciada","Práctica de recuperación","Tarjetas"],
+    5:["Práctica deliberada","Andamiaje","Doble codificación"],
+    6:["Metacognición","Bucle de mejora (iterar)","Práctica deliberada"],
+    7:["Doble codificación (diagrama)","Analogías (constructivismo)","Intercalado"],
+    8:["Práctica deliberada","Carga cognitiva","Metacognición"],
+    9:["Práctica deliberada (proyecto real)","Transferencia","Intercalado"],
+    10:["Metacognición","Repetición espaciada","Autoevaluación"]
+  };
+
+  const CHECK = {
+    1:{q:"Sin mirar: ¿por qué se dice que un LLM \"predice\" y no \"busca\"?",
+       a:"Porque genera el siguiente fragmento de texto más probable según patrones aprendidos; no consulta una base de datos ni verifica hechos. Por eso puede sonar seguro y equivocarse (alucinar)."},
+    2:{q:"Enumera de memoria los 6 pasos que convierten tu mensaje en una respuesta.",
+       a:"Tokenización → embeddings → capas de atención → distribución de probabilidad → muestreo (sampling) → repetición, token a token."},
+    3:{q:"Di tres límites reales de la IA que te obligan a verificar.",
+       a:"Alucinaciones, conocimiento con fecha de corte y falta de verificación automática (a lo que se suman los sesgos de los datos)."},
+    4:{q:"Define con tus palabras: token, embedding y contexto.",
+       a:"Token: la unidad mínima de texto. Embedding: su representación numérica (un vector). Contexto/ventana: todo lo que el modelo tiene presente a la vez, con un límite."},
+    5:{q:"¿Qué cinco elementos hacen fuerte a una \"Descripción\" (prompt)?",
+       a:"Rol, contexto, restricciones, ejemplos y formato deseado."},
+    6:{q:"Explica el bucle Descripción–Discernimiento.",
+       a:"Describes la tarea → evalúas la respuesta con criterio (discernimiento) → reformulas → mejoras. Iterar es la habilidad central."},
+    7:{q:"Con una analogía, ¿qué diferencia hay entre MCP y A2A?",
+       a:"MCP es el \"USB-C\": conecta una IA con sus herramientas (vertical). A2A es el \"HTTP\" entre agentes: conecta una IA con otras IAs (horizontal)."},
+    8:{q:"Nombra tres funciones del chat de Claude y para qué sirven.",
+       a:"Por ejemplo: Artifacts (crear documentos, código o visualizaciones), búsqueda web (datos actuales) y Proyectos (espacios con memoria propia). Verifica nombres y versiones en la documentación."},
+    9:{q:"¿Cuál es el flujo completo de principio a fin?",
+       a:"Delegar → describir bien → usar herramientas → discernir/iterar → entregar."},
+    10:{q:"En 3 frases: ¿qué es la IA, cómo funciona y cómo usarla bien?",
+       a:"Es un LLM que predice el siguiente token a partir de patrones aprendidos; funciona tokenizando, atendiendo el contexto y muestreando palabra por palabra; se usa bien describiendo con claridad, verificando lo importante y aplicando el marco 4D."}
+  };
+
+  const VIDEO = {}; // ranura por capítulo: pega aquí una URL de embed (YouTube/Vimeo) y aparece arriba del capítulo
+
+  const DIAG = {
+    1:{cap:"El modelo no \"busca\" la respuesta: calcula el siguiente token más probable y elige uno.",
+       svg:`<svg viewBox="0 0 640 210" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="El modelo predice el siguiente token">
+  <g font-family="IBM Plex Mono, monospace" font-size="15" fill="var(--hueso)">
+    <rect x="16" y="26" width="44" height="34" rx="8" fill="var(--tinta-2)" stroke="var(--linea-fuerte)"/><text x="38" y="48" text-anchor="middle">El</text>
+    <rect x="68" y="26" width="62" height="34" rx="8" fill="var(--tinta-2)" stroke="var(--linea-fuerte)"/><text x="99" y="48" text-anchor="middle">gato</text>
+    <rect x="138" y="26" width="74" height="34" rx="8" fill="var(--tinta-2)" stroke="var(--linea-fuerte)"/><text x="175" y="48" text-anchor="middle">subió</text>
+    <rect x="220" y="26" width="40" height="34" rx="8" fill="var(--tinta-2)" stroke="var(--linea-fuerte)"/><text x="240" y="48" text-anchor="middle">al</text>
+    <rect x="268" y="26" width="46" height="34" rx="8" fill="var(--ambar)" stroke="var(--ambar)"/><text x="291" y="48" text-anchor="middle" fill="var(--tinta)">?</text>
+    <text x="326" y="47" font-size="13" fill="var(--niebla)">← elige el siguiente token</text>
+  </g>
+  <g font-family="IBM Plex Mono, monospace" font-size="13">
+    <text x="16" y="100" fill="var(--ambar)">siguiente token probable:</text>
+    <text x="16" y="128" fill="var(--hueso)">tejado</text><rect x="110" y="116" width="252" height="16" rx="4" fill="var(--ambar)"/><text x="372" y="129" fill="var(--niebla)">70%</text>
+    <text x="16" y="160" fill="var(--hueso)">árbol</text><rect x="110" y="148" width="79" height="16" rx="4" fill="var(--salvia)"/><text x="199" y="161" fill="var(--niebla)">22%</text>
+    <text x="16" y="192" fill="var(--hueso)">coche</text><rect x="110" y="180" width="22" height="16" rx="4" fill="var(--arcilla)"/><text x="142" y="193" fill="var(--niebla)">6%</text>
+  </g>
+</svg>`},
+    2:{cap:"Tu mensaje se vuelve respuesta repitiendo este ciclo, una palabra (token) a la vez.",
+       svg:`<svg viewBox="0 0 672 180" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Proceso interno paso a paso">
+  <g stroke="var(--linea-fuerte)" stroke-width="2">
+    <line x1="82" y1="60" x2="142" y2="60"/><line x1="194" y1="60" x2="254" y2="60"/><line x1="306" y1="60" x2="366" y2="60"/><line x1="418" y1="60" x2="478" y2="60"/><line x1="530" y1="60" x2="590" y2="60"/>
+  </g>
+  <g fill="var(--tinta-2)" stroke="var(--ambar-2)">
+    <circle cx="56" cy="60" r="26"/><circle cx="168" cy="60" r="26"/><circle cx="280" cy="60" r="26"/><circle cx="392" cy="60" r="26"/><circle cx="504" cy="60" r="26"/><circle cx="616" cy="60" r="26"/>
+  </g>
+  <g font-family="IBM Plex Mono, monospace" fill="var(--ambar)" font-size="15" text-anchor="middle">
+    <text x="56" y="65">1</text><text x="168" y="65">2</text><text x="280" y="65">3</text><text x="392" y="65">4</text><text x="504" y="65">5</text><text x="616" y="65">6</text>
+  </g>
+  <g font-family="IBM Plex Sans, sans-serif" fill="var(--hueso)" font-size="11" text-anchor="middle">
+    <text x="56" y="104">Tokens</text><text x="168" y="104">Embeddings</text><text x="280" y="104">Atención</text><text x="392" y="104">Probabilidad</text><text x="504" y="104">Muestreo</text><text x="616" y="104">Repetición</text>
+  </g>
+  <path d="M616 92 C616 150 56 150 56 96" fill="none" stroke="var(--salvia)" stroke-width="2" stroke-dasharray="5 6"/>
+  <path d="M56 96 l-5 -11 l11 0 z" fill="var(--salvia)"/>
+  <text x="336" y="150" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--salvia)">se repite, token a token, hasta terminar</text>
+</svg>`},
+    7:{cap:"MCP conecta una IA con sus herramientas (el \"USB-C\"); A2A conecta unas IAs con otras (el \"HTTP\").",
+       svg:`<svg viewBox="0 0 660 230" width="100%" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="MCP vertical frente a A2A horizontal">
+  <line x1="330" y1="18" x2="330" y2="214" stroke="var(--linea)" stroke-width="1" stroke-dasharray="4 6"/>
+  <g font-family="IBM Plex Mono, monospace">
+    <text x="150" y="28" text-anchor="middle" font-size="13" fill="var(--ambar)">MCP · vertical</text>
+    <rect x="110" y="44" width="80" height="36" rx="9" fill="var(--tinta-2)" stroke="var(--ambar)"/><text x="150" y="67" text-anchor="middle" font-size="13" fill="var(--hueso)">IA</text>
+    <g stroke="var(--linea-fuerte)" stroke-width="2"><line x1="150" y1="80" x2="58" y2="150"/><line x1="150" y1="80" x2="150" y2="150"/><line x1="150" y1="80" x2="242" y2="150"/></g>
+    <g fill="var(--tinta-3)" stroke="var(--linea-fuerte)"><rect x="20" y="150" width="76" height="34" rx="8"/><rect x="112" y="150" width="76" height="34" rx="8"/><rect x="204" y="150" width="76" height="34" rx="8"/></g>
+    <g font-size="11" fill="var(--hueso)" text-anchor="middle"><text x="58" y="171">Datos</text><text x="150" y="171">Web</text><text x="242" y="171">Archivos</text></g>
+    <text x="150" y="206" text-anchor="middle" font-size="11" fill="var(--niebla)">una IA ↔ sus herramientas</text>
+
+    <text x="500" y="28" text-anchor="middle" font-size="13" fill="var(--ambar)">A2A · horizontal</text>
+    <rect x="453" y="44" width="96" height="36" rx="9" fill="var(--tinta-2)" stroke="var(--salvia)"/><text x="501" y="67" text-anchor="middle" font-size="12" fill="var(--hueso)">Agente coord.</text>
+    <g stroke="var(--linea-fuerte)" stroke-width="2"><line x1="501" y1="80" x2="410" y2="150"/><line x1="501" y1="80" x2="592" y2="150"/></g>
+    <g fill="var(--tinta-3)" stroke="var(--salvia-2)"><rect x="372" y="150" width="76" height="34" rx="8"/><rect x="554" y="150" width="76" height="34" rx="8"/></g>
+    <g font-size="11" fill="var(--hueso)" text-anchor="middle"><text x="410" y="171">Agente A</text><text x="592" y="171">Agente B</text></g>
+    <text x="501" y="206" text-anchor="middle" font-size="11" fill="var(--niebla)">una IA ↔ otras IAs</text>
+  </g>
+</svg>`}
+  };
+
+  function techHTML(L){
+    const t=TECNICAS[L.n]; if(!t||!t.length) return '';
+    return '<div class="ltags"><span class="ltags__k">Técnicas aplicadas</span>'+t.map(x=>'<span class="ltag">'+x+'</span>').join('')+'</div>';
+  }
+  function videoHTML(L){
+    const u=VIDEO[L.n]; if(!u) return '';
+    return '<div class="lvideo"><iframe src="'+u+'" title="Video del capítulo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>';
+  }
+  function diagramHTML(L){
+    const d=DIAG[L.n]; if(!d) return '';
+    return '<figure class="diagram">'+d.svg+'<figcaption>'+d.cap+'</figcaption></figure>';
+  }
+  function checkHTML(L){
+    const c=CHECK[L.n]; if(!c) return '';
+    return '<div class="check"><div class="lblock__k">Comprobación rápida · práctica de recuperación</div>'
+      +'<p class="check__q">'+c.q+'</p>'
+      +'<button class="check__btn" id="checkReveal" type="button">Ver respuesta modelo</button>'
+      +'<div class="check__a" id="checkAnswer"><p>'+c.a+'</p></div></div>';
+  }
+  function repasoHTML(){
+    return '<div class="repaso"><b>Repaso espaciado:</b> vuelve a este capítulo en 1–2 días y responde la comprobación sin mirar. Tu racha es justamente eso — volver para reforzar lo aprendido.</div>';
+  }
+
+  function buildLessonHTML(L){
+    const gloss = L.gloss ? `<div class="glossary">`+L.gloss.map(g=>`<div class="gterm"><b>${g[0]}:</b> <span>${g[1]}</span></div>`).join('')+`</div>` : '';
+    return `<div class="lpanel__bar">
+        <button class="lpanel__back" id="lpBack">← Volver al curso</button>
+        <span class="lpanel__day">Día ${L.n} de 10</span>
+      </div>
+      <div class="lpanel__body">
+        <h3 class="lpanel__t">${L.t}</h3>
+        <div class="lpanel__dur">${L.dur}</div>
+        ${videoHTML(L)}${techHTML(L)}
+
+        <div class="lblock"><div class="lblock__k">Objetivo</div><p>${L.obj}</p></div>
+        <div class="lblock"><div class="lblock__k">Qué aprender</div>${L.learn}${gloss}</div>
+        ${diagramHTML(L)}
+        <div class="lblock"><div class="lblock__k">Recursos verificables</div><div class="lresources">${resourcesHTML(L)}</div></div>
+
+        ${timerHTML()}
+
+        <div class="lblock"><div class="lblock__k">Ejercicio práctico</div><p>${L.ex}</p></div>
+        <div class="logro"><div class="lblock__k">Señal de logro</div><p>${L.win}</p></div>
+        ${checkHTML(L)}
+        ${repasoHTML()}
+
+        <div class="lpanel__foot">
+          <button class="done-btn" id="doneBtn">Marcar señal de logro ✓</button>
+          <span class="foot-msg" id="footMsg">Termina el ejercicio y marca tu señal de logro para no quedarte a la mitad.</span>
+        </div>
+      </div>`;
+  }
+
+  /* --- abrir / cerrar lección --- */
+  function openLesson(n){
+    clearInterval(tIv); tRun=false; tElapsed=0;
+    const L = COURSE.find(x=>x.n===n); if(!L) return;
+    curDay = n;
+    panel.innerHTML = buildLessonHTML(L);
+    panel.classList.add('show');
+    wrapLessonTerms();
+
+    // refs del temporizador
+    tBox    = document.getElementById('uplink');
+    tFill   = document.getElementById('uplFill');
+    tStatus = document.getElementById('uplStatus');
+    tGo     = document.getElementById('uplGo');
+    tHint   = document.getElementById('uplHint');
+    const tResetBtn = document.getElementById('uplReset');
+    const opts = document.getElementById('uplOpts');
+
+    // duración por defecto = chip activo (45)
+    const pressed = opts ? opts.querySelector('.uchip[aria-pressed="true"]') : null;
+    tDur = (pressed ? parseInt(pressed.dataset.min,10) : 45) * 60;
+    tReset();
+
+    if(opts) opts.querySelectorAll('.uchip').forEach(ch=>{
+      ch.addEventListener('click',()=>{
+        opts.querySelectorAll('.uchip').forEach(c=>c.setAttribute('aria-pressed','false'));
+        ch.setAttribute('aria-pressed','true');
+        tDur = parseInt(ch.dataset.min,10)*60;
+        tReset();
+      });
+    });
+    if(tGo) tGo.addEventListener('click',()=>{
+      if(tBox && tBox.classList.contains('done')){ tReset(); tStartFn(); return; }
+      if(tRun) tPause(); else tStartFn();
+    });
+    if(tResetBtn) tResetBtn.addEventListener('click', tReset);
+
+    // botón de "volver"
+    const back = document.getElementById('lpBack');
+    if(back) back.addEventListener('click',()=>{
+      clearInterval(tIv); tRun=false;
+      panel.classList.remove('show'); panel.innerHTML='';
+      document.getElementById('curso').scrollIntoView({behavior: reduce?'auto':'smooth', block:'start'});
+    });
+
+    // botón de señal de logro
+    doneBtnRef = document.getElementById('doneBtn');
+    footMsgRef = document.getElementById('footMsg');
+    refreshDoneBtn();
+    if(doneBtnRef) doneBtnRef.addEventListener('click',()=>{
+      const was = isDone(n);
+      data.c1.done[n] = !was; persist();
+      if(!was){
+        touchStreak();
+        if(footMsgRef) footMsgRef.innerHTML = '<b>¡Señal de logro registrada!</b> Vuelve mañana para no romper tu racha.';
+        if(doneBtnRef){ doneBtnRef.classList.add('flash'); setTimeout(()=>doneBtnRef.classList.remove('flash'),600); }
+      } else if(footMsgRef){ footMsgRef.textContent = 'Marcado como pendiente de nuevo.'; }
+      refreshDoneBtn(); renderList(); updateDash();
+    });
+
+    touchStreak(); updateDash();
+    const cr=document.getElementById('checkReveal');
+    if(cr) cr.addEventListener('click',function(){
+      const a=document.getElementById('checkAnswer'); if(!a) return;
+      const open=a.classList.toggle('show');
+      cr.textContent = open ? 'Ocultar respuesta' : 'Ver respuesta modelo';
+    });
+    panel.scrollIntoView({behavior: reduce?'auto':'smooth', block:'start'});
+  }
+  function refreshDoneBtn(){
+    if(!doneBtnRef) return;
+    const d = isDone(curDay);
+    doneBtnRef.classList.toggle('is-done', d);
+    doneBtnRef.textContent = d ? 'Día completado ✓' : 'Marcar señal de logro ✓';
+  }
+
+  /* --- botón del tablero --- */
+  const dashGo = document.getElementById('dashGo');
+  if(dashGo) dashGo.addEventListener('click',()=>{
+    const n = nextDay(); openLesson(n===null ? 1 : n);
+  });
+
+  /* --- aviso de guardado --- */
+  if(!Store.available){
+    const sn = document.getElementById('saveNote');
+    if(sn) sn.textContent = 'Aviso: este navegador bloquea el guardado local; tu avance no se conservará al cerrar la pestaña.';
+  }
+
+  /* --- arranque --- */
+  renderList();
+  updateDash();
+  renderGlossary();
+  initTooltip();
+})();
+
+/* ====================== NAV ACTIVA + REVEAL ====================== */
+const sections=[...document.querySelectorAll('section[id], header.hero')];
+const navLinks=[...document.querySelectorAll('.nav__links a')];
+const navObs=new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting){
+    const id=e.target.id; navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+id));
+  }});
+},{rootMargin:'-45% 0px -50% 0px'});
+sections.forEach(s=>{ if(s.id) navObs.observe(s); });
+
+const revObs=new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); revObs.unobserve(e.target); } });
+},{rootMargin:'0px 0px -8% 0px',threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
+/* ====================== GENERADOR DE VIDEO (IAFLOW) ====================== */
+(function(){
+  var ideasBox=document.getElementById('gpIdeas');
+  if(!ideasBox) return;
+  var ideaCount=0, MAX=5, MIN=2;
+  var toastEl=document.getElementById('gpToast'), toastT;
+
+  function flashErr(m){ var e=document.getElementById('gpErr'); e.textContent=m; setTimeout(function(){ if(e.textContent===m) e.textContent=''; },3500); }
+  function addIdea(idea,meta){
+    if(ideaCount>=MAX) return;
+    ideaCount++;
+    var div=document.createElement('div'); div.className='gp-idea';
+    div.innerHTML='<div class="gp-idea-head"><span class="gp-num">PASO '+ideaCount+'</span><button class="gp-x" title="Quitar" type="button">&times;</button></div>'+
+      '<textarea class="gp-i-idea" placeholder="La idea principal de este paso"></textarea>'+
+      '<textarea class="gp-i-meta" placeholder="Una metáfora o ejemplo cotidiano para esa idea"></textarea>';
+    if(idea) div.querySelector('.gp-i-idea').value=idea;
+    if(meta) div.querySelector('.gp-i-meta').value=meta;
+    div.querySelector('.gp-x').addEventListener('click',function(){
+      if(ideaCount<=MIN){ flashErr('Necesitas al menos '+MIN+' pasos.'); return; }
+      div.remove(); ideaCount--; renumber();
+    });
+    ideasBox.appendChild(div);
+  }
+  function renumber(){ var n=ideasBox.querySelectorAll('.gp-num'); for(var i=0;i<n.length;i++) n[i].textContent='PASO '+(i+1); }
+  document.getElementById('gpAddIdea').addEventListener('click',function(){ if(ideaCount>=MAX){ flashErr('Máximo '+MAX+' pasos para un clip enfocado.'); return; } addIdea(); });
+  addIdea(); addIdea(); addIdea();
+
+  function val(id){ return document.getElementById(id).value.trim(); }
+  function lc(s){ return s?s.charAt(0).toLowerCase()+s.slice(1):s; }
+  function clean(s){ return s.replace(/\s+/g,' ').trim(); }
+  function shorten(s,n){ n=n||7; var w=clean(s).split(' '); return w.slice(0,n).join(' ')+(w.length>n?'…':''); }
+  function onscreen(s,n){ n=n||4;
+    var stop={'de':1,'la':1,'el':1,'que':1,'y':1,'a':1,'en':1,'un':1,'una':1,'los':1,'las':1,'con':1,'por':1,'para':1,'su':1,'al':1,'lo':1,'es':1,'se':1,'tu':1,'te':1};
+    var w=clean(s).replace(/[¿?¡!.,;:"]/g,'').split(' ').filter(function(x){return x&&!stop[x.toLowerCase()];});
+    return w.slice(0,n).join(' ');
+  }
+  function gatherIdeas(){ var arr=[]; ideasBox.querySelectorAll('.gp-idea').forEach(function(nd){ var i=clean(nd.querySelector('.gp-i-idea').value); var m=clean(nd.querySelector('.gp-i-meta').value); if(i) arr.push({idea:i,meta:m}); }); return arr; }
+  function distribute(total,n){ var base=total>=200?{g:15,p:20,r:20,c:25}:{g:8,p:8,r:8,c:12}; var used=base.g+base.p+base.r+base.c; var rem=Math.max(total-used,n*4); return {g:base.g,p:base.p,per:Math.round(rem/n),r:base.r,c:base.c}; }
+  function secs(x){ return x+'s'; }
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  function build(){
+    var titulo=val('gpTitulo'),tema=val('gpTema'),gancho=val('gpGancho'),cierre=val('gpCierre'),
+        tecnica=val('gpTecnica'),personaje=val('gpPersonaje')||'el personaje',dur=val('gpDuracion'),formato=val('gpFormato');
+    var ideas=gatherIdeas(); var miss=[];
+    if(!titulo)miss.push('título'); if(!tema)miss.push('tema'); if(!gancho)miss.push('gancho');
+    if(ideas.length<MIN)miss.push('al menos '+MIN+' pasos con idea');
+    if(miss.length){ flashErr('Falta: '+miss.join(', ')+'.'); return null; }
+    document.getElementById('gpErr').textContent='';
+    var durText=dur==='360'?'unos seis minutos':'noventa segundos';
+    var d=distribute(parseInt(dur,10),ideas.length);
+    var L=[];
+    L.push('(Gancho) '+gancho);
+    L.push('(Promesa) En '+durText+', vas a entender '+lc(tema)+'. Y cuando lo veas, no volverás a verlo igual.');
+    ideas.forEach(function(it,i){ L.push('(Paso '+(i+1)+') '+it.idea+(it.meta?' '+it.meta:'')); });
+    var rep=ideas.map(function(it,i){ return (i+1)+') '+shorten(it.idea,8); }).join('; ');
+    L.push('(Mini-repaso) Recuerda: '+rep+'.');
+    L.push('(Cierre) '+(cierre?'Por hoy, una pregunta para ti: '+cierre:'Por hoy, una pregunta para ti: ¿qué vas a hacer distinto con esto?'));
+    var script=L.join('\n\n');
+    var shots=[];
+    shots.push({e:'Gancho',t:onscreen(gancho,4)||'La verdad',v:'Pantalla oscura; aparece la palabra clave',a:personaje+' · intriga',d:secs(d.g)});
+    shots.push({e:'Promesa',t:'Lo que vas a entender',v:'Personaje frente al tema, luz cálida',a:personaje+' · entusiasmo',d:secs(d.p)});
+    ideas.forEach(function(it,i){ shots.push({e:'Paso '+(i+1),t:onscreen(it.idea,4),v:it.meta||'Metáfora visual de la idea',a:personaje+' · explicando',d:secs(d.per)}); });
+    shots.push({e:'Mini-repaso',t:'Recuerda: 1 · 2 · 3',v:'Tres tarjetas numeradas aparecen una a una',a:personaje+' · señalando',d:secs(d.r)});
+    shots.push({e:'Cierre',t:'Tu turno',v:'Tarjeta de marca IAFLOW + pregunta',a:personaje+' · reflexivo',d:secs(d.c)});
+    var prompt='Crea un video educativo de '+durText+' en español (acento latinoamericano neutro) para el curso "'+titulo+'" del modelo IAFLOW. Usa EXACTAMENTE el guion de abajo como voz en off, sin reescribirlo.\n\n'+
+      'Estilo: dibujos animados (cartoon) limpios y amables; el personaje "'+personaje+'" narra y aparece en cada escena con la acción indicada. Una metáfora visual por idea; texto en pantalla solo con frases de 3 a 6 palabras (usa las de la lista de tomas). Paleta de marca: #16BFA6, #4F46E5, #F5A623. Voz cálida, cercana y pausada, hablando de "tú". Música suave de fondo a bajo volumen. Subtítulos en español activados. Formato '+formato+', 1080p.\n\n'+
+      'IMPORTANTE: todo el texto en pantalla en español y sin errores. No uses plantillas con marcas de terceros. Intro de 3-5s con el logo y el nombre "IAFLOW" + el título del capítulo, y outro de 3-5s con cierre de marca IAFLOW.\n\n'+
+      '[GUION - VOZ EN OFF]\n'+script;
+    return {titulo:titulo,tecnica:tecnica,dur:durText,formato:formato,personaje:personaje,script:script,shots:shots,prompt:prompt};
+  }
+
+  function render(pkg){
+    document.getElementById('gpEmpty').style.display='none';
+    document.getElementById('gpResult').style.display='block';
+    document.getElementById('gpMeta').innerHTML='<span class="gp-chip">'+esc(pkg.titulo)+'</span><span class="gp-chip gp-chip--amber">'+esc(pkg.tecnica)+'</span><span class="gp-chip">'+esc(pkg.dur)+'</span><span class="gp-chip">'+esc(pkg.formato)+'</span><span class="gp-chip">Narrador: '+esc(pkg.personaje)+'</span>';
+    document.getElementById('gpScript').value=pkg.script;
+    document.getElementById('gpPrompt').value=pkg.prompt;
+    var tb=document.querySelector('#gpShots tbody'); tb.innerHTML='';
+    pkg.shots.forEach(function(s){ var tr=document.createElement('tr'); tr.innerHTML='<td><b>'+esc(s.e)+'</b></td><td contenteditable="true">'+esc(s.t)+'</td><td contenteditable="true">'+esc(s.v)+'</td><td contenteditable="true">'+esc(s.a)+'</td><td class="gp-dur">'+esc(s.d)+'</td>'; tb.appendChild(tr); });
+    document.getElementById('gpResult').scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+
+  function currentMarkdown(){
+    var chips=[].map.call(document.querySelectorAll('#gpMeta .gp-chip'),function(c){return c.textContent;});
+    var titulo=chips[0]||'Lección';
+    var script=document.getElementById('gpScript').value;
+    var prompt=document.getElementById('gpPrompt').value;
+    var rows=[].map.call(document.querySelectorAll('#gpShots tbody tr'),function(tr){ var c=tr.querySelectorAll('td'); return '| '+c[0].textContent+' | '+c[1].textContent+' | '+c[2].textContent+' | '+c[3].textContent+' | '+c[4].textContent+' |'; });
+    return '# Paquete de producción · '+titulo+'\nModelo: IAFLOW — '+chips.slice(1).join(' · ')+'\n\n## Guion (voz en off)\n'+script+'\n\n## Lista de tomas\n| Escena | Texto en pantalla | Visual / metáfora | Personaje · acción | Dur. |\n|---|---|---|---|---|\n'+rows.join('\n')+'\n\n## Prompt para la herramienta\n'+prompt+'\n';
+  }
+
+  function toast(){ toastEl.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(function(){toastEl.classList.remove('show');},1400); }
+  function fallbackCopy(text){ var ta=document.createElement('textarea'); ta.value=text; ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy');toast();}catch(e){} document.body.removeChild(ta); }
+  function copyText(text){ if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(toast,function(){fallbackCopy(text);}); } else { fallbackCopy(text); } }
+
+  document.getElementById('gpGen').addEventListener('click',function(){ var p=build(); if(p) render(p); });
+  document.getElementById('gpClear').addEventListener('click',function(){
+    ['gpTitulo','gpTema','gpGancho','gpCierre'].forEach(function(id){document.getElementById(id).value='';});
+    document.getElementById('gpPersonaje').value='Flux';
+    ideasBox.innerHTML=''; ideaCount=0; addIdea(); addIdea(); addIdea();
+    document.getElementById('gpResult').style.display='none';
+    document.getElementById('gpEmpty').style.display='block';
+    document.getElementById('gpErr').textContent='';
+  });
+  document.querySelectorAll('[data-gpcopy]').forEach(function(b){ b.addEventListener('click',function(){ copyText(document.getElementById(b.getAttribute('data-gpcopy')).value); }); });
+  document.getElementById('gpCopyAll').addEventListener('click',function(){ copyText(currentMarkdown()); });
+  document.getElementById('gpDownload').addEventListener('click',function(){
+    var titulo=(document.querySelector('#gpMeta .gp-chip')?document.querySelector('#gpMeta .gp-chip').textContent:'leccion');
+    var name='paquete-'+titulo.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')+'.md';
+    var blob=new Blob([currentMarkdown()],{type:'text/markdown'});
+    var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=name; a.click();
+    setTimeout(function(){URL.revokeObjectURL(a.href);},1500);
+  });
+})();
+/* ====================== MENÚ DESPLEGABLE (Qué es AtlasApex) ====================== */
+(function(){
+  var drop=document.getElementById('navDrop');
+  if(!drop) return;
+  var btn=document.getElementById('navDropBtn'), menu=document.getElementById('navDropMenu');
+  function place(){ var r=btn.getBoundingClientRect(); var mw=menu.offsetWidth||200; var left=r.left;
+    if(left+mw>window.innerWidth-8) left=window.innerWidth-8-mw; if(left<8) left=8;
+    menu.style.left=left+'px'; menu.style.top=(r.bottom+8)+'px'; }
+  function open(){ drop.classList.add('open'); btn.setAttribute('aria-expanded','true'); menu.style.display='flex'; place(); }
+  function close(){ drop.classList.remove('open'); btn.setAttribute('aria-expanded','false'); menu.style.display='none'; }
+  btn.addEventListener('click',function(e){ e.stopPropagation(); drop.classList.contains('open')?close():open(); });
+  document.addEventListener('click',function(e){ if(drop.classList.contains('open') && !menu.contains(e.target) && e.target!==btn) close(); });
+  menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',close); });
+  window.addEventListener('scroll',function(){ if(drop.classList.contains('open')) close(); }, true);
+  window.addEventListener('resize',function(){ if(drop.classList.contains('open')) place(); });
+})();
+
+/* ====================== PERFIL LOCAL (continuidad en este dispositivo) ====================== */
+(function(){
+  var nameI=document.getElementById('profName');
+  if(!nameI) return;
+  var av=document.getElementById('profAv'), hi=document.getElementById('profHi'),
+      cont=document.getElementById('profCont'), save=document.getElementById('profSave');
+  var KEYN='iaflow_nombre';
+  function paint(n){ if(n){ av.textContent=n.charAt(0); hi.textContent='Hola, '+n; cont.style.display='inline-block'; nameI.value=n; }
+    else { av.textContent='?'; hi.textContent='Crea tu perfil'; cont.style.display='none'; } }
+  function doSave(){ var n=nameI.value.trim(); try{ if(n) localStorage.setItem(KEYN,n); else localStorage.removeItem(KEYN); }catch(e){} paint(n); }
+  save.addEventListener('click',doSave);
+  nameI.addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); doSave(); } });
+  var saved=''; try{ saved=localStorage.getItem(KEYN)||''; }catch(e){} paint(saved);
+})();
+</script>
+<script type="module">
+/* ============ CONFIG: pega aquí los 2 datos de tu proyecto Supabase ============ */
+const SB_URL = "TU_PROJECT_URL";       /* p.ej. https://abcdwxyz.supabase.co */
+const SB_KEY = "TU_PUBLISHABLE_KEY";   /* sb_publishable_...  (o tu anon key)  */
+/* ============================================================================== */
+
+const $av = document.getElementById('acctAv');
+const $body = document.getElementById('acctBody');
+const KEYN = 'iaflow_nombre';
+const configured = SB_URL && SB_KEY && !/^TU_/.test(SB_URL) && !/^TU_/.test(SB_KEY);
+
+function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function setAv(t){ $av.textContent = (t && t.charAt(0)) ? t.charAt(0) : '?'; }
+function getName(){ try{ return localStorage.getItem(KEYN)||''; }catch(e){ return ''; } }
+function snapshot(){ var o={}; for(var i=0;i<localStorage.length;i++){ var k=localStorage.key(i); if(k && k.indexOf('sb-')!==0 && k.indexOf('acct_')!==0){ o[k]=localStorage.getItem(k); } } return o; }
+function restore(o){ if(!o) return; Object.keys(o).forEach(function(k){ try{ localStorage.setItem(k,o[k]); }catch(e){} }); }
+
+function renderLocal(){
+  var n=getName(); setAv(n);
+  $body.innerHTML =
+    '<p class="profcard__hi">'+(n?('Hola, '+esc(n)):'Crea tu perfil')+'</p>'+
+    '<p class="profcard__sub">Tu nombre se guarda en este dispositivo. Para cuentas reales con inicio de sesión en cualquier dispositivo, configura Supabase (te dejé las instrucciones).</p>'+
+    '<div class="profcard__row"><input id="lpName" type="text" placeholder="Tu nombre" value="'+esc(n)+'"><button class="profcard__btn" id="lpSave" type="button">Guardar</button></div>'+
+    (n?'<a class="profcard__cta" href="#curso">Continuar el curso &rarr;</a>':'');
+  document.getElementById('lpSave').addEventListener('click', function(){
+    var v=document.getElementById('lpName').value.trim();
+    try{ if(v) localStorage.setItem(KEYN,v); else localStorage.removeItem(KEYN); }catch(e){}
+    renderLocal();
+  });
+}
+
+if(!configured){ renderLocal(); }
+else {
+  try {
+    const { createClient } = await import('https://esm.sh/@supabase/supabase-js@2');
+    const sb = createClient(SB_URL, SB_KEY);
+
+    async function push(){
+      const { data:{ user } } = await sb.auth.getUser();
+      if(!user) return;
+      await sb.from('user_state').upsert({ user_id:user.id, name:getName()||user.email, progress:snapshot(), updated_at:new Date().toISOString() });
+    }
+    async function pullAndReload(){
+      const { data:{ user } } = await sb.auth.getUser();
+      if(!user) return;
+      const { data } = await sb.from('user_state').select('name, progress').eq('user_id', user.id).maybeSingle();
+      if(data){
+        if(data.name){ try{ localStorage.setItem(KEYN, data.name); }catch(e){} }
+        if(data.progress){ restore(data.progress); }
+        location.reload();
+      } else { renderUser(user); }
+    }
+
+    function setMsg(t){ var m=document.getElementById('acMsg'); if(m) m.textContent=t; }
+    async function doIn(){
+      var email=(document.getElementById('acEmail').value||'').trim(), pass=document.getElementById('acPass').value;
+      if(!email||!pass){ setMsg('Escribe correo y contraseña.'); return; }
+      setMsg('Entrando…');
+      const { error } = await sb.auth.signInWithPassword({ email, password:pass });
+      if(error){ setMsg(error.message); return; }
+      await pullAndReload();
+    }
+    async function doUp(){
+      var email=(document.getElementById('acEmail').value||'').trim(), pass=document.getElementById('acPass').value;
+      if(!email||!pass){ setMsg('Escribe correo y contraseña (mínimo 6 caracteres).'); return; }
+      setMsg('Creando cuenta…');
+      const { data, error } = await sb.auth.signUp({ email, password:pass });
+      if(error){ setMsg(error.message); return; }
+      if(data.session){ await push(); await pullAndReload(); }
+      else { setMsg('Cuenta creada. Revisa tu correo para confirmar y luego entra.'); }
+    }
+    function renderAuth(){
+      setAv('');
+      $body.innerHTML =
+        '<p class="profcard__hi">Tu cuenta</p>'+
+        '<p class="profcard__sub">Inicia sesión para guardar tu avance y retomarlo en cualquier dispositivo.</p>'+
+        '<div class="profcard__row"><input id="acEmail" type="email" placeholder="Correo" autocomplete="email"></div>'+
+        '<div class="profcard__row" style="margin-top:8px"><input id="acPass" type="password" placeholder="Contraseña" autocomplete="current-password"></div>'+
+        '<div class="profcard__row" style="margin-top:10px"><button class="profcard__btn" id="acIn" type="button">Entrar</button><button class="profcard__btn" id="acUp" type="button" style="background:transparent;color:var(--ambar);border:1px solid var(--linea-fuerte)">Crear cuenta</button></div>'+
+        '<p class="profcard__sub" id="acMsg" style="margin:10px 0 0;min-height:1px"></p>';
+      document.getElementById('acIn').addEventListener('click', doIn);
+      document.getElementById('acUp').addEventListener('click', doUp);
+    }
+    function renderUser(user){
+      var n=getName()||user.email; setAv(n);
+      $body.innerHTML =
+        '<p class="profcard__hi">Hola, '+esc(n)+'</p>'+
+        '<p class="profcard__sub">'+esc(user.email)+' · sesión activa. Tu avance se guarda en tu cuenta.</p>'+
+        '<div class="profcard__row"><input id="acName" type="text" placeholder="Tu nombre" value="'+esc(getName())+'"><button class="profcard__btn" id="acSave" type="button">Guardar en mi cuenta</button></div>'+
+        '<div class="profcard__row" style="margin-top:10px"><button class="profcard__btn" id="acPull" type="button" style="background:transparent;color:var(--ambar);border:1px solid var(--linea-fuerte)">Traer mi avance de la nube</button><button class="profcard__btn" id="acOut" type="button" style="background:transparent;color:var(--niebla);border:1px solid var(--linea-fuerte)">Cerrar sesión</button></div>'+
+        '<a class="profcard__cta" href="#curso">Continuar el curso &rarr;</a>'+
+        '<p class="profcard__sub" id="acStatus" style="margin:10px 0 0;min-height:1px"></p>';
+      document.getElementById('acSave').addEventListener('click', async function(){
+        var v=(document.getElementById('acName').value||'').trim();
+        try{ if(v) localStorage.setItem(KEYN,v); else localStorage.removeItem(KEYN); }catch(e){}
+        var st=document.getElementById('acStatus'); st.textContent='Guardando…';
+        await push(); st.textContent='Guardado en tu cuenta ✓'; setAv(getName()||user.email);
+      });
+      document.getElementById('acPull').addEventListener('click', pullAndReload);
+      document.getElementById('acOut').addEventListener('click', async function(){ try{ await push(); }catch(e){} await sb.auth.signOut(); });
+    }
+
+    setInterval(async function(){ try{ const { data:{ user } } = await sb.auth.getUser(); if(user) push(); }catch(e){} }, 30000);
+
+    sb.auth.onAuthStateChange((_e, session)=>{ if(session && session.user) renderUser(session.user); else renderAuth(); });
+    const { data:{ session } } = await sb.auth.getSession();
+    if(session && session.user) renderUser(session.user); else renderAuth();
+  } catch(err){
+    $body.innerHTML = '<p class="profcard__hi">Cuentas no disponibles</p><p class="profcard__sub">No se pudo cargar el servicio de cuentas. Revisa tu conexión y la configuración de Supabase, o usa el perfil local mientras tanto.</p>';
+  }
+}
+</script>
+</body>
+</html>
